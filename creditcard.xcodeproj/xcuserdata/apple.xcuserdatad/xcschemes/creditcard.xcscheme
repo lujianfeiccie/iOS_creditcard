@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18F69E3817F870AD0063A5BB"
-               BuildableName = "&#20449;&#29992;&#21345;&#21830;&#22478;.app"
+               BuildableName = "&#31215;&#20998;&#20817;&#25442;.app"
                BlueprintName = "creditcard"
                ReferencedContainer = "container:creditcard.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F69E3817F870AD0063A5BB"
-            BuildableName = "&#20449;&#29992;&#21345;&#21830;&#22478;.app"
+            BuildableName = "&#31215;&#20998;&#20817;&#25442;.app"
             BlueprintName = "creditcard"
             ReferencedContainer = "container:creditcard.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F69E3817F870AD0063A5BB"
-            BuildableName = "&#20449;&#29992;&#21345;&#21830;&#22478;.app"
+            BuildableName = "&#31215;&#20998;&#20817;&#25442;.app"
             BlueprintName = "creditcard"
             ReferencedContainer = "container:creditcard.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18F69E3817F870AD0063A5BB"
-            BuildableName = "&#20449;&#29992;&#21345;&#21830;&#22478;.app"
+            BuildableName = "&#31215;&#20998;&#20817;&#25442;.app"
             BlueprintName = "creditcard"
             ReferencedContainer = "container:creditcard.xcodeproj">
          </BuildableReference>

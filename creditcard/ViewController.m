@@ -48,16 +48,17 @@
     NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
     self.list = MutableArray;
    
-    queue = [[NSOperationQueue alloc] init];
+    [mUITableView separatorStyle ];
+    //queue = [[NSOperationQueue alloc] init];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
         NSLog(@"numberOfRowsInSection");
     return [self.list count];
 }
--(void) downloadImage:(CellAndImage* )obj{
-    NSURL *imageUrl = [NSURL URLWithString:obj.image_url];
+-(UIImage*) getImageByUrl:(NSString*) temp_image_url{
+    NSURL *imageUrl = [NSURL URLWithString:temp_image_url];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
-    [obj.cell setImage:image];
+    return image;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,7 +76,7 @@
                              CustomCellIdentifier];
  
     NSUInteger row = [indexPath row];
-    //cell.titleLabel.text = [self.list objectAtIndex:row];
+
     
     Good *good =[self.list objectAtIndex:row];
    
@@ -84,19 +85,17 @@
     [cell setIntegral:good.integral];
     [cell setNo:good.no];
     
-    if(![good.image isEqualToString:@""]){
-        
-    CellAndImage* mCellAndImage = [[CellAndImage alloc] init];
-        mCellAndImage.cell = cell;
-        mCellAndImage.image_url = @"http://ftp130223.host125.web522.com/uploadfiles/photo_store/2013/09/15/2013091511065810_ico_small.jpg";
-    
-    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(downloadImage:) object:mCellAndImage];
-     [queue addOperation:op];
+    if(good.image!=nil){
+      /*
+       NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(downloadImage:) object:mCellAndImage];
+     [queue addOperation:op];*/
+        [cell setImage:good.image];
     }
     return cell;
 }
--(GLfloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 120;
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 160;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"didSelectRowAtIndexPath %ld",(long)[indexPath row]);
@@ -159,11 +158,12 @@
         NSString *good_name =[temp_data objectForKey:@"good_name"];
         NSString *good_integral =[temp_data objectForKey:@"good_integral"];
         NSString *good_no =[temp_data objectForKey:@"good_no"];
-        
+        NSString *good_imgurl =[temp_data objectForKey:@"good_imgurl"];
         Good *good = [[Good alloc]init];
         good.title = good_name;
         good.integral = good_integral;
         good.no = good_no;
+        good.image = [self getImageByUrl:good_imgurl];
         if(good_name==nil) continue;
         
         [self.list addObject:good];
@@ -171,5 +171,4 @@
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
- 
 @end

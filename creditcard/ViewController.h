@@ -19,7 +19,7 @@ HttpRequestToolDelegate>
     SINavigationMenuView *menu;
     UITableView *mUITableView;
     HttpRequestTool* mHttpRequestTool;
-    NSOperationQueue* queue;
+   // NSOperationQueue* queue;
 }
 @property (strong, nonatomic) NSMutableArray *list;
 @end

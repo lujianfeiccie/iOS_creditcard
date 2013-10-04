@@ -45,7 +45,7 @@
 }
 -(void) initStyle{
     self.titleLabel.numberOfLines = 1000;
-   
+    self.noLabel.numberOfLines=1000;
 }
 - (void)setTitle:(NSString *)t_title {
     NSLog(@"setTitle %@",t_title);
@@ -65,5 +65,12 @@
         no = [t_no copy];
         self.noLabel.text = no;
     }
+}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.imageView setFrame:CGRectMake(0, 10,120, 120)];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+
 }
 @end

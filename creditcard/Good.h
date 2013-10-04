@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @interface Good : NSObject{
-NSString *image;
+UIImage *image;
 NSString *title;
 NSString *integral;
 NSString *no;
 }
-@property(strong,nonatomic) NSString *image;
+@property(strong,nonatomic) UIImage *image;
 @property(strong,nonatomic) NSString *title;
 @property(strong,nonatomic) NSString *integral;
 @property(strong,nonatomic) NSString *no;

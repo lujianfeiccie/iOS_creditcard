@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1814AE8417FEC416003C4E45 /* me_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1814AE8317FEC416003C4E45 /* me_icon.png */; };
 		183016E817F9D74C00ED6F9D /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 183016E717F9D74C00ED6F9D /* Constants.m */; };
 		18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AE41B117FE717A00B7770D /* CustomCell.xib */; };
 		18AE41B817FE7D2A00B7770D /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41B717FE7D2A00B7770D /* CustomCell.m */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1814AE8317FEC416003C4E45 /* me_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_icon.png; sourceTree = "<group>"; };
 		183016E617F9D74C00ED6F9D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		183016E717F9D74C00ED6F9D /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		18AE41B117FE717A00B7770D /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
@@ -62,7 +64,7 @@
 		18AE41BD17FEAB8500B7770D /* CellAndImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellAndImage.m; sourceTree = "<group>"; };
 		18C6C58617FB28F400876454 /* HttpRequestTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestTool.h; sourceTree = "<group>"; };
 		18C6C58717FB28F400876454 /* HttpRequestTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestTool.m; sourceTree = "<group>"; };
-		18F69E3917F870AD0063A5BB /* 信用卡商城.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "信用卡商城.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18F69E3917F870AD0063A5BB /* 积分兑换.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "积分兑换.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F69E3C17F870AD0063A5BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		18F69E4017F870AD0063A5BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -125,6 +127,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1814AE8217FEC3DB003C4E45 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1814AE8317FEC416003C4E45 /* me_icon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		18AE41AB17FE70F900B7770D /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -163,7 +173,7 @@
 		18F69E3A17F870AD0063A5BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18F69E3917F870AD0063A5BB /* 信用卡商城.app */,
+				18F69E3917F870AD0063A5BB /* 积分兑换.app */,
 				18F69E5A17F870AD0063A5BB /* creditcardTests.xctest */,
 			);
 			name = Products;
@@ -183,6 +193,7 @@
 		18F69E4217F870AD0063A5BB /* creditcard */ = {
 			isa = PBXGroup;
 			children = (
+				1814AE8217FEC3DB003C4E45 /* Images */,
 				18AE41AB17FE70F900B7770D /* Custom */,
 				18C6C58517FB223F00876454 /* HttpUtil */,
 				18F69E7117F878A70063A5BB /* NavigationMenuView */,
@@ -276,7 +287,7 @@
 			);
 			name = creditcard;
 			productName = creditcard;
-			productReference = 18F69E3917F870AD0063A5BB /* 信用卡商城.app */;
+			productReference = 18F69E3917F870AD0063A5BB /* 积分兑换.app */;
 			productType = "com.apple.product-type.application";
 		};
 		18F69E5917F870AD0063A5BB /* creditcardTests */ = {
@@ -341,6 +352,7 @@
 				18F69E8717F878A70063A5BB /* arrow_down1@2x.png in Resources */,
 				18F69E8817F878A70063A5BB /* arrow_down@2x.png in Resources */,
 				18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */,
+				1814AE8417FEC416003C4E45 /* me_icon.png in Resources */,
 				18F69E8617F878A70063A5BB /* arrow_down1.png in Resources */,
 				18F69E5517F870AD0063A5BB /* Images.xcassets in Resources */,
 				18F69E4717F870AD0063A5BB /* InfoPlist.strings in Resources */,
@@ -510,7 +522,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "creditcard/creditcard-Prefix.pch";
 				INFOPLIST_FILE = "creditcard/creditcard-Info.plist";
-				PRODUCT_NAME = "信用卡商城";
+				PRODUCT_NAME = "积分兑换";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -527,7 +539,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "creditcard/creditcard-Prefix.pch";
 				INFOPLIST_FILE = "creditcard/creditcard-Info.plist";
-				PRODUCT_NAME = "信用卡商城";
+				PRODUCT_NAME = "积分兑换";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

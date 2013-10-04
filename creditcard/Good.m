@@ -16,7 +16,7 @@
 
 -(id) init{
     NSLog(@"good init");
-    image = @"";
+    image = Nil;
     title = @"";
     integral = @"";
     no = @"";
