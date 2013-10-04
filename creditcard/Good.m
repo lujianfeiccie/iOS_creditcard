@@ -10,6 +10,7 @@
 
 @implementation Good
 @synthesize image;
+@synthesize image_url;
 @synthesize title;
 @synthesize integral;
 @synthesize no;
@@ -17,6 +18,7 @@
 -(id) init{
     NSLog(@"good init");
     image = Nil;
+    image_url = @"";
     title = @"";
     integral = @"";
     no = @"";

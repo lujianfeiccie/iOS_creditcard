@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1814AE8417FEC416003C4E45 /* me_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1814AE8317FEC416003C4E45 /* me_icon.png */; };
+		1814AE8917FEDA5D003C4E45 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1814AE8617FEDA5D003C4E45 /* SVProgressHUD.bundle */; };
+		1814AE8A17FEDA5D003C4E45 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814AE8817FEDA5D003C4E45 /* SVProgressHUD.m */; };
+		1814AE8E17FEEADF003C4E45 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814AE8D17FEEADF003C4E45 /* ImageHelper.m */; };
 		183016E817F9D74C00ED6F9D /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 183016E717F9D74C00ED6F9D /* Constants.m */; };
 		18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AE41B117FE717A00B7770D /* CustomCell.xib */; };
 		18AE41B817FE7D2A00B7770D /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41B717FE7D2A00B7770D /* CustomCell.m */; };
@@ -53,6 +56,11 @@
 
 /* Begin PBXFileReference section */
 		1814AE8317FEC416003C4E45 /* me_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_icon.png; sourceTree = "<group>"; };
+		1814AE8617FEDA5D003C4E45 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		1814AE8717FEDA5D003C4E45 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		1814AE8817FEDA5D003C4E45 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		1814AE8C17FEEADF003C4E45 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
+		1814AE8D17FEEADF003C4E45 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
 		183016E617F9D74C00ED6F9D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		183016E717F9D74C00ED6F9D /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		18AE41B117FE717A00B7770D /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
@@ -135,6 +143,25 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		1814AE8517FEDA5D003C4E45 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				1814AE8617FEDA5D003C4E45 /* SVProgressHUD.bundle */,
+				1814AE8717FEDA5D003C4E45 /* SVProgressHUD.h */,
+				1814AE8817FEDA5D003C4E45 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		1814AE8B17FEEAB0003C4E45 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				1814AE8C17FEEADF003C4E45 /* ImageHelper.h */,
+				1814AE8D17FEEADF003C4E45 /* ImageHelper.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		18AE41AB17FE70F900B7770D /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +220,8 @@
 		18F69E4217F870AD0063A5BB /* creditcard */ = {
 			isa = PBXGroup;
 			children = (
+				1814AE8B17FEEAB0003C4E45 /* Util */,
+				1814AE8517FEDA5D003C4E45 /* SVProgressHUD */,
 				1814AE8217FEC3DB003C4E45 /* Images */,
 				18AE41AB17FE70F900B7770D /* Custom */,
 				18C6C58517FB223F00876454 /* HttpUtil */,
@@ -354,6 +383,7 @@
 				18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */,
 				1814AE8417FEC416003C4E45 /* me_icon.png in Resources */,
 				18F69E8617F878A70063A5BB /* arrow_down1.png in Resources */,
+				1814AE8917FEDA5D003C4E45 /* SVProgressHUD.bundle in Resources */,
 				18F69E5517F870AD0063A5BB /* Images.xcassets in Resources */,
 				18F69E4717F870AD0063A5BB /* InfoPlist.strings in Resources */,
 				18F69E5017F870AD0063A5BB /* Main.storyboard in Resources */,
@@ -385,6 +415,8 @@
 				18F69E8C17F878A70063A5BB /* SIMenuConfiguration.m in Sources */,
 				18F69E8E17F878A70063A5BB /* SINavigationMenuView.m in Sources */,
 				18F69E8917F878A70063A5BB /* SICellSelection.m in Sources */,
+				1814AE8A17FEDA5D003C4E45 /* SVProgressHUD.m in Sources */,
+				1814AE8E17FEEADF003C4E45 /* ImageHelper.m in Sources */,
 				18F69E8F17F878A70063A5BB /* UIColor+Extension.m in Sources */,
 				18F69E4917F870AD0063A5BB /* main.m in Sources */,
 				18F69E8A17F878A70063A5BB /* SIMenuButton.m in Sources */,

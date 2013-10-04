@@ -11,4 +11,5 @@
 @implementation CellAndImage
 @synthesize cell;
 @synthesize image_url;
+@synthesize index;
 @end

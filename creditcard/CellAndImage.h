@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "CustomCell.h"
+#import "Good.h"
 @interface CellAndImage : NSObject
 {
     CustomCell* cell;
+    NSUInteger index;
     NSString* image_url;
 }
 @property(nonatomic,retain) CustomCell* cell;
 @property(nonatomic,retain) NSString* image_url;
+@property(nonatomic) NSUInteger index;
 @end
