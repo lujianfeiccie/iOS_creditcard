@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import "Constants.h"
+#import "CustomCell.h"
+#import "Good.h"
+#import "CellAndImage.h"
 @interface ViewController ()
 
 @end
@@ -45,27 +48,55 @@
     NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
     self.list = MutableArray;
    
+    queue = [[NSOperationQueue alloc] init];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
         NSLog(@"numberOfRowsInSection");
     return [self.list count];
 }
+-(void) downloadImage:(CellAndImage* )obj{
+    NSURL *imageUrl = [NSURL URLWithString:obj.image_url];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    [obj.cell setImage:image];
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"cellForRowAtIndexPath");
-    static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
-                             TableSampleIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]
-                initWithStyle:UITableViewCellStyleDefault
-                reuseIdentifier:TableSampleIdentifier];
+    static NSString *CustomCellIdentifier = @"CustomCellIdentifier";
+    
+    static BOOL nibsRegistered = NO;
+    if (!nibsRegistered) {
+        UINib *nib = [UINib nibWithNibName:@"CustomCell" bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:CustomCellIdentifier];
+        nibsRegistered = YES;
     }
-    
+    CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             CustomCellIdentifier];
+ 
     NSUInteger row = [indexPath row];
-    cell.textLabel.text = [self.list objectAtIndex:row];
+    //cell.titleLabel.text = [self.list objectAtIndex:row];
+    
+    Good *good =[self.list objectAtIndex:row];
+   
+    [cell initStyle];
+    [cell setTitle:good.title];
+    [cell setIntegral:good.integral];
+    [cell setNo:good.no];
+    
+    if(![good.image isEqualToString:@""]){
+        
+    CellAndImage* mCellAndImage = [[CellAndImage alloc] init];
+        mCellAndImage.cell = cell;
+        mCellAndImage.image_url = @"http://ftp130223.host125.web522.com/uploadfiles/photo_store/2013/09/15/2013091511065810_ico_small.jpg";
+    
+    NSInvocationOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(downloadImage:) object:mCellAndImage];
+     [queue addOperation:op];
+    }
     return cell;
+}
+-(GLfloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 120;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"didSelectRowAtIndexPath %ld",(long)[indexPath row]);
@@ -126,9 +157,16 @@
     for (NSDictionary* temp_data in [dataDic objectForKey:@"data"]) {
        
         NSString *good_name =[temp_data objectForKey:@"good_name"];
-         NSLog(@"%@",good_name);
+        NSString *good_integral =[temp_data objectForKey:@"good_integral"];
+        NSString *good_no =[temp_data objectForKey:@"good_no"];
+        
+        Good *good = [[Good alloc]init];
+        good.title = good_name;
+        good.integral = good_integral;
+        good.no = good_no;
         if(good_name==nil) continue;
-        [self.list addObject:good_name];
+        
+        [self.list addObject:good];
     }
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }

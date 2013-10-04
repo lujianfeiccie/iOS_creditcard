@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		183016E817F9D74C00ED6F9D /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 183016E717F9D74C00ED6F9D /* Constants.m */; };
+		18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AE41B117FE717A00B7770D /* CustomCell.xib */; };
+		18AE41B817FE7D2A00B7770D /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41B717FE7D2A00B7770D /* CustomCell.m */; };
+		18AE41BB17FE94F000B7770D /* Good.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BA17FE94F000B7770D /* Good.m */; };
+		18AE41BE17FEAB8500B7770D /* CellAndImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BD17FEAB8500B7770D /* CellAndImage.m */; };
 		18C6C58817FB28F400876454 /* HttpRequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6C58717FB28F400876454 /* HttpRequestTool.m */; };
 		18F69E3D17F870AD0063A5BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E3C17F870AD0063A5BB /* Foundation.framework */; };
 		18F69E3F17F870AD0063A5BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */; };
@@ -49,6 +53,13 @@
 /* Begin PBXFileReference section */
 		183016E617F9D74C00ED6F9D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		183016E717F9D74C00ED6F9D /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		18AE41B117FE717A00B7770D /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		18AE41B617FE7D2A00B7770D /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
+		18AE41B717FE7D2A00B7770D /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
+		18AE41B917FE94F000B7770D /* Good.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Good.h; sourceTree = "<group>"; };
+		18AE41BA17FE94F000B7770D /* Good.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Good.m; sourceTree = "<group>"; };
+		18AE41BC17FEAB8500B7770D /* CellAndImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellAndImage.h; sourceTree = "<group>"; };
+		18AE41BD17FEAB8500B7770D /* CellAndImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellAndImage.m; sourceTree = "<group>"; };
 		18C6C58617FB28F400876454 /* HttpRequestTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestTool.h; sourceTree = "<group>"; };
 		18C6C58717FB28F400876454 /* HttpRequestTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestTool.m; sourceTree = "<group>"; };
 		18F69E3917F870AD0063A5BB /* 信用卡商城.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "信用卡商城.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +125,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18AE41AB17FE70F900B7770D /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				18AE41B617FE7D2A00B7770D /* CustomCell.h */,
+				18AE41B717FE7D2A00B7770D /* CustomCell.m */,
+				18AE41B117FE717A00B7770D /* CustomCell.xib */,
+				18AE41B917FE94F000B7770D /* Good.h */,
+				18AE41BA17FE94F000B7770D /* Good.m */,
+				18AE41BC17FEAB8500B7770D /* CellAndImage.h */,
+				18AE41BD17FEAB8500B7770D /* CellAndImage.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
 		18C6C58517FB223F00876454 /* HttpUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +183,7 @@
 		18F69E4217F870AD0063A5BB /* creditcard */ = {
 			isa = PBXGroup;
 			children = (
+				18AE41AB17FE70F900B7770D /* Custom */,
 				18C6C58517FB223F00876454 /* HttpUtil */,
 				18F69E7117F878A70063A5BB /* NavigationMenuView */,
 				18F69E4B17F870AD0063A5BB /* AppDelegate.h */,
@@ -314,6 +340,7 @@
 			files = (
 				18F69E8717F878A70063A5BB /* arrow_down1@2x.png in Resources */,
 				18F69E8817F878A70063A5BB /* arrow_down@2x.png in Resources */,
+				18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */,
 				18F69E8617F878A70063A5BB /* arrow_down1.png in Resources */,
 				18F69E5517F870AD0063A5BB /* Images.xcassets in Resources */,
 				18F69E4717F870AD0063A5BB /* InfoPlist.strings in Resources */,
@@ -337,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18AE41BB17FE94F000B7770D /* Good.m in Sources */,
 				183016E817F9D74C00ED6F9D /* Constants.m in Sources */,
 				18F69E8B17F878A70063A5BB /* SIMenuCell.m in Sources */,
 				18F69E8D17F878A70063A5BB /* SIMenuTable.m in Sources */,
@@ -348,7 +376,9 @@
 				18F69E8F17F878A70063A5BB /* UIColor+Extension.m in Sources */,
 				18F69E4917F870AD0063A5BB /* main.m in Sources */,
 				18F69E8A17F878A70063A5BB /* SIMenuButton.m in Sources */,
+				18AE41BE17FEAB8500B7770D /* CellAndImage.m in Sources */,
 				18C6C58817FB28F400876454 /* HttpRequestTool.m in Sources */,
+				18AE41B817FE7D2A00B7770D /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
