@@ -13,7 +13,7 @@
 @end
 
 @implementation ViewController
-
+@synthesize list = _list;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,7 +36,39 @@
         menu.delegate = self;
         self.navigationItem.titleView = menu;
     }
-
+    
+    mUITableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 420)];
+    [mUITableView setDelegate:self];
+    [mUITableView setDataSource:self];
+    [self.view addSubview:mUITableView];
+    
+    NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
+    self.list = MutableArray;
+   
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+        NSLog(@"numberOfRowsInSection");
+    return [self.list count];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"cellForRowAtIndexPath");
+    static NSString *TableSampleIdentifier = @"TableSampleIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:
+                             TableSampleIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault
+                reuseIdentifier:TableSampleIdentifier];
+    }
+    
+    NSUInteger row = [indexPath row];
+    cell.textLabel.text = [self.list objectAtIndex:row];
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"didSelectRowAtIndexPath %ld",(long)[indexPath row]);
 }
 - (void)didReceiveMemoryWarning
 {
@@ -66,6 +98,8 @@
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
     [self requestData:[ self getTypeId:index ]];
+   
+   // [self.list performSelectorOnMainThread:@selector(addObject:) withObject:@"wokao" waitUntilDone:YES]; //addObject:@"wokao"];
 }
 -(void) threafunc{
     [mHttpRequestTool startRequest];
@@ -73,23 +107,31 @@
 
 -(void)requestData:(NSUInteger)index{
     
-    NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=2&page=1",API_URL,index];
+    NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=10&page=1",API_URL,index];
     mHttpRequestTool.url = request_url;
     
     NSThread* myThread = [[NSThread alloc] initWithTarget:self selector:@selector(threafunc) object:nil];
     [myThread start];
 }
 
-//回调方法
--(void)onMsgReceive:(NSString*) msg
-{
-    NSData* jsonData = [msg dataUsingEncoding:NSASCIIStringEncoding];
-    NSError *error;
-    //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-    NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
 
+//回调方法
+-(void)onMsgReceive:(NSData*) msg
+{
+       NSError *error;
+    //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
+    NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:msg options:NSJSONReadingMutableLeaves error:&error];
+
+    [self.list removeAllObjects];
     for (NSDictionary* temp_data in [dataDic objectForKey:@"data"]) {
-        NSLog(@"%@",[temp_data objectForKey:@"good_name"]);
+       
+        NSString *good_name =[temp_data objectForKey:@"good_name"];
+         NSLog(@"%@",good_name);
+        if(good_name==nil) continue;
+        [self.list addObject:good_name];
     }
+    [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
+
+ 
 @end

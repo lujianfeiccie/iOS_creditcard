@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import"SINavigationMenuView.h"
 #import "HttpRequestTool.h"
-@interface ViewController : UIViewController<SINavigationMenuDelegate,HttpRequestToolDelegate>
+@interface ViewController : UIViewController
+<SINavigationMenuDelegate,
+UITableViewDataSource,
+UITableViewDelegate,
+HttpRequestToolDelegate>
 {
     NSArray *bank_array;
     SINavigationMenuView *menu;
+    UITableView *mUITableView;
     HttpRequestTool* mHttpRequestTool;
+    
 }
+@property (strong, nonatomic) NSMutableArray *list;
 @end

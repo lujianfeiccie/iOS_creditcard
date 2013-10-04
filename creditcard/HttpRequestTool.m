@@ -26,9 +26,7 @@
     //将请求的url数据放到NSData对象中
     NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     
-    NSString *jsonString = [[NSString alloc] initWithData:response
-                                                 encoding:NSUTF8StringEncoding];
-    [delegate onMsgReceive:jsonString];
+    [delegate onMsgReceive:response];
  }
 
 @end
