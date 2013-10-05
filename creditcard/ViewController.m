@@ -13,6 +13,7 @@
 #import "CellAndImage.h"
 #import "SVProgressHUD.h"
 #import "ImageHelper.h"
+
 @interface ViewController ()
 
 @end
@@ -80,7 +81,7 @@
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
     
     //压缩图片
-    CGSize mCGSize = CGSizeMake(120, 120);
+    CGSize mCGSize = CGSizeMake(CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT);
     UIImage* after_image = [ImageHelper image:image fitInSize:mCGSize];
     
     [[self.list objectAtIndex:mCellAndImage.index] setImage:after_image];
@@ -139,7 +140,29 @@
 
 //选中某个Cell
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"didSelectRowAtIndexPath %ld",(long)[indexPath row]);
+   // NSLog(@"didSelectRowAtIndexPath %ld",(long)[indexPath row]);
+    Good *good = [self.list objectAtIndex:[indexPath row]];
+    selectedIndex = [indexPath row];
+    NSString* message = [NSString stringWithFormat:@"复制编号:%@ ?",good.no];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:message delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alert show];
+    alert = nil;
+
+}
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"clickedButtonAtIndex %i",buttonIndex);
+    switch (buttonIndex) {
+        case 0://取消
+            break;
+        case 1:{//确定
+            UIPasteboard *pboard = [UIPasteboard generalPasteboard];
+            Good *good = [self.list objectAtIndex:selectedIndex];
+            pboard.string = good.no;
+            [SVProgressHUD showSuccessWithStatus:@"已成功复制!"];
+        }break;
+        default:
+            break;
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -147,8 +170,8 @@
     NSLog(@"didReceiveMemoryWarning");
     // Dispose of any resources that can be recreated.
 }
--(NSUInteger) getTypeId:(NSUInteger)bank{
-    NSUInteger result = 0;
+-(NSInteger) getTypeId:(NSInteger)bank{
+    NSInteger result = 0;
     switch (bank) {
         case 0:
             result = 1;
@@ -187,13 +210,25 @@
 
 
 //回调方法,接收http返回json数据
--(void)onMsgReceive:(NSData*) msg
+-(void)onMsgReceive :(NSData*) msg :(NSError*) error
 {
-    NSError *error;
-    //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
-    NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:msg options:NSJSONReadingMutableLeaves error:&error];
+    [SVProgressHUD dismiss];//消除等待提示
     
-   
+    if(error != Nil){
+        NSLog(@"%i",[error code]);
+        return;
+    }
+    
+    NSError *parse_error=Nil;
+    //IOS5自带解析类NSJSONSerialization从response中解析出数据放到字典中
+    NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:msg options:NSJSONReadingMutableLeaves error:&parse_error];
+    
+    
+    if(parse_error != Nil){
+        NSLog(@"%i",[parse_error code]);
+        return;
+    }
+    
     for (Good* temp_good in self.list) { //清除旧数据
         [temp_good setImage:nil];
     }
@@ -221,7 +256,7 @@
     
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];//主线程更新列表数据
     
-    [SVProgressHUD dismiss];//消除等待提示
+    
 }
 
 @end

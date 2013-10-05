@@ -11,7 +11,7 @@
 //接口定义
 @protocol HttpRequestToolDelegate <NSObject>
 @required
--(void)onMsgReceive:(NSData*) msg;
+-(void) onMsgReceive :(NSData*) msg :(NSError*) error;
 @end
 
 @interface HttpRequestTool : NSObject{

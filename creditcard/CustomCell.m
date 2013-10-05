@@ -7,7 +7,7 @@
 //
 
 #import "CustomCell.h"
-
+#import "Constants.h"
 @implementation CustomCell
 @synthesize image;
 @synthesize title;
@@ -30,8 +30,10 @@
 -(void) initStyle{
     self.titleLabel.numberOfLines = 1000;
     self.noLabel.numberOfLines=1000;
-    [self.imageView setFrame:CGRectMake(0, 18,120, 120)];
+    [self.imageView setFrame:CGRectMake(CELL_IMAGE_LEFT, CELL_IMAGE_TOP,CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT)];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    //无色
+    self.selectionStyle = UITableViewCellSelectionStyleGray;
 }
 - (void)setTitle:(NSString *)t_title {
     
@@ -55,7 +57,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self.imageView setFrame:CGRectMake(0, 18,120, 120)];
+    [self.imageView setFrame:CGRectMake(CELL_IMAGE_LEFT, CELL_IMAGE_TOP,CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT)];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
 }

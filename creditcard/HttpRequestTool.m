@@ -21,12 +21,13 @@
        delegate == nil){
         return;
     }
+    NSError *error = Nil;
     //加载一个NSURL对象
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     //将请求的url数据放到NSData对象中
-    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSData *response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
     
-    [delegate onMsgReceive:response];
+    [delegate onMsgReceive:response:error];
  }
 
 @end

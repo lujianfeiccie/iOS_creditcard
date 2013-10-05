@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1814AE8417FEC416003C4E45 /* me_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1814AE8317FEC416003C4E45 /* me_icon.png */; };
-		1814AE8917FEDA5D003C4E45 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1814AE8617FEDA5D003C4E45 /* SVProgressHUD.bundle */; };
-		1814AE8A17FEDA5D003C4E45 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814AE8817FEDA5D003C4E45 /* SVProgressHUD.m */; };
 		1814AE8E17FEEADF003C4E45 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814AE8D17FEEADF003C4E45 /* ImageHelper.m */; };
 		183016E817F9D74C00ED6F9D /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 183016E717F9D74C00ED6F9D /* Constants.m */; };
+		18359A1C18008D78005E5A2A /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18359A1918008D78005E5A2A /* SVProgressHUD.bundle */; };
+		18359A1D18008D78005E5A2A /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 18359A1B18008D78005E5A2A /* SVProgressHUD.m */; };
+		18359A1F18008E97005E5A2A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18359A1E18008E97005E5A2A /* QuartzCore.framework */; };
 		18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AE41B117FE717A00B7770D /* CustomCell.xib */; };
 		18AE41B817FE7D2A00B7770D /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41B717FE7D2A00B7770D /* CustomCell.m */; };
 		18AE41BB17FE94F000B7770D /* Good.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BA17FE94F000B7770D /* Good.m */; };
@@ -56,13 +57,14 @@
 
 /* Begin PBXFileReference section */
 		1814AE8317FEC416003C4E45 /* me_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_icon.png; sourceTree = "<group>"; };
-		1814AE8617FEDA5D003C4E45 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		1814AE8717FEDA5D003C4E45 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		1814AE8817FEDA5D003C4E45 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		1814AE8C17FEEADF003C4E45 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
 		1814AE8D17FEEADF003C4E45 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
 		183016E617F9D74C00ED6F9D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		183016E717F9D74C00ED6F9D /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		18359A1918008D78005E5A2A /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		18359A1A18008D78005E5A2A /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		18359A1B18008D78005E5A2A /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		18359A1E18008E97005E5A2A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		18AE41B117FE717A00B7770D /* CustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		18AE41B617FE7D2A00B7770D /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCell.h; sourceTree = "<group>"; };
 		18AE41B717FE7D2A00B7770D /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCell.m; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18359A1F18008E97005E5A2A /* QuartzCore.framework in Frameworks */,
 				18F69E3F17F870AD0063A5BB /* CoreGraphics.framework in Frameworks */,
 				18F69E4117F870AD0063A5BB /* UIKit.framework in Frameworks */,
 				18F69E3D17F870AD0063A5BB /* Foundation.framework in Frameworks */,
@@ -143,16 +146,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		1814AE8517FEDA5D003C4E45 /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				1814AE8617FEDA5D003C4E45 /* SVProgressHUD.bundle */,
-				1814AE8717FEDA5D003C4E45 /* SVProgressHUD.h */,
-				1814AE8817FEDA5D003C4E45 /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		1814AE8B17FEEAB0003C4E45 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +153,16 @@
 				1814AE8D17FEEADF003C4E45 /* ImageHelper.m */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		18359A1818008D78005E5A2A /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				18359A1918008D78005E5A2A /* SVProgressHUD.bundle */,
+				18359A1A18008D78005E5A2A /* SVProgressHUD.h */,
+				18359A1B18008D78005E5A2A /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		18AE41AB17FE70F900B7770D /* Custom */ = {
@@ -179,8 +182,6 @@
 		18C6C58517FB223F00876454 /* HttpUtil */ = {
 			isa = PBXGroup;
 			children = (
-				183016E617F9D74C00ED6F9D /* Constants.h */,
-				183016E717F9D74C00ED6F9D /* Constants.m */,
 				18C6C58617FB28F400876454 /* HttpRequestTool.h */,
 				18C6C58717FB28F400876454 /* HttpRequestTool.m */,
 			);
@@ -209,6 +210,7 @@
 		18F69E3B17F870AD0063A5BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18359A1E18008E97005E5A2A /* QuartzCore.framework */,
 				18F69E3C17F870AD0063A5BB /* Foundation.framework */,
 				18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */,
 				18F69E4017F870AD0063A5BB /* UIKit.framework */,
@@ -220,8 +222,10 @@
 		18F69E4217F870AD0063A5BB /* creditcard */ = {
 			isa = PBXGroup;
 			children = (
+				18359A1818008D78005E5A2A /* SVProgressHUD */,
+				183016E617F9D74C00ED6F9D /* Constants.h */,
+				183016E717F9D74C00ED6F9D /* Constants.m */,
 				1814AE8B17FEEAB0003C4E45 /* Util */,
-				1814AE8517FEDA5D003C4E45 /* SVProgressHUD */,
 				1814AE8217FEC3DB003C4E45 /* Images */,
 				18AE41AB17FE70F900B7770D /* Custom */,
 				18C6C58517FB223F00876454 /* HttpUtil */,
@@ -383,7 +387,7 @@
 				18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */,
 				1814AE8417FEC416003C4E45 /* me_icon.png in Resources */,
 				18F69E8617F878A70063A5BB /* arrow_down1.png in Resources */,
-				1814AE8917FEDA5D003C4E45 /* SVProgressHUD.bundle in Resources */,
+				18359A1C18008D78005E5A2A /* SVProgressHUD.bundle in Resources */,
 				18F69E5517F870AD0063A5BB /* Images.xcassets in Resources */,
 				18F69E4717F870AD0063A5BB /* InfoPlist.strings in Resources */,
 				18F69E5017F870AD0063A5BB /* Main.storyboard in Resources */,
@@ -411,11 +415,11 @@
 				18F69E8B17F878A70063A5BB /* SIMenuCell.m in Sources */,
 				18F69E8D17F878A70063A5BB /* SIMenuTable.m in Sources */,
 				18F69E5317F870AD0063A5BB /* ViewController.m in Sources */,
+				18359A1D18008D78005E5A2A /* SVProgressHUD.m in Sources */,
 				18F69E4D17F870AD0063A5BB /* AppDelegate.m in Sources */,
 				18F69E8C17F878A70063A5BB /* SIMenuConfiguration.m in Sources */,
 				18F69E8E17F878A70063A5BB /* SINavigationMenuView.m in Sources */,
 				18F69E8917F878A70063A5BB /* SICellSelection.m in Sources */,
-				1814AE8A17FEDA5D003C4E45 /* SVProgressHUD.m in Sources */,
 				1814AE8E17FEEADF003C4E45 /* ImageHelper.m in Sources */,
 				18F69E8F17F878A70063A5BB /* UIColor+Extension.m in Sources */,
 				18F69E4917F870AD0063A5BB /* main.m in Sources */,
