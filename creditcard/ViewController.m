@@ -194,6 +194,7 @@
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
+    [queue cancelAllOperations];//取消所有操作
     [self requestData:[ self getTypeId:index ]];
 }
 
