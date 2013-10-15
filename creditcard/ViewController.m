@@ -37,8 +37,12 @@
     alert = nil;
 }
 
+//筛选对话框
+- (void) filterDlg {
+    
+}
 - (void) initData{
-    bank_array = [NSArray arrayWithObjects:@"平安银行", @"农业银行", @"中国银行", nil];
+    bank_array = [NSArray arrayWithObjects:@"平安银行", @"农业银行", @"中国银行", @"招商银行", nil];
     
     mHttpRequestTool = [HttpRequestTool alloc]; //初始化HTTP请求类
     mHttpRequestTool.delegate = self;           //注册回调
@@ -53,8 +57,12 @@
         self.navigationItem.titleView = menu;
         
         //加入关于按钮
-           UIBarButtonItem*backButton = [[UIBarButtonItem alloc] initWithTitle:@"关于"style:UIBarButtonItemStyleBordered target:self action:@selector(aboutDlg)];
-        self.navigationItem.rightBarButtonItem = backButton;
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"关于"style:UIBarButtonItemStyleBordered target:self action:@selector(aboutDlg)];
+        self.navigationItem.leftBarButtonItem = backButton;
+        
+        //加入筛选按钮
+        UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"筛选"style:UIBarButtonItemStyleBordered target:self action:@selector(filterDlg)];
+        self.navigationItem.rightBarButtonItem = filterButton;
     }
     
     //加入列表
@@ -69,6 +77,9 @@
     
     //初始化异步队列线程类
     queue = [[NSOperationQueue alloc] init];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear]; //弹出等待提示
+    [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSLog(@"numberOfRowsInSection");
@@ -113,7 +124,13 @@
     
     [cell initStyle];
     [cell setTitle:good.title];
-    [cell setIntegral:good.integral];
+    NSString* temp_integral = @"";
+    if ([good.cash floatValue] == 0.0f) {
+        temp_integral = [NSString stringWithFormat:@"%@",good.integral];
+    }else{
+        temp_integral = [NSString stringWithFormat:@"%@ ￥%@",good.integral,good.cash];
+    }
+    [cell setIntegral:temp_integral];
     [cell setNo:good.no];
     
     //图片处理
@@ -182,6 +199,9 @@
         case 2:
             result = 3;
             break;
+        case 3:
+            result = 4;
+            break;
         default:
             break;
     }
@@ -243,13 +263,13 @@
         NSString *good_integral =[each_data objectForKey:@"good_integral"];
         NSString *good_no =[each_data objectForKey:@"good_no"];
         NSString *good_imgurl =[each_data objectForKey:@"good_imgurl"];
-        
+        NSString *good_cash =[each_data objectForKey:@"good_cash"];
         Good *good = [[Good alloc]init];
         good.title = good_name;
         good.integral = good_integral;
         good.no = good_no;
         good.image_url = good_imgurl;
-        
+        good.cash =good_cash;
         if(good_name==nil) continue;
         
         [self.list addObject:good];//加入到list

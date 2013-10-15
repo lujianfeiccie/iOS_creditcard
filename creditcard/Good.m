@@ -14,7 +14,7 @@
 @synthesize title;
 @synthesize integral;
 @synthesize no;
-
+@synthesize cash;
 -(id) init{
     NSLog(@"good init");
     image = Nil;
@@ -22,6 +22,7 @@
     title = @"";
     integral = @"";
     no = @"";
+    cash = @"0";
     return self;
 }
 @end

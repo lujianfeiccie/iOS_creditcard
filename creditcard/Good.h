@@ -14,10 +14,12 @@ NSString *image_url;
 NSString *title;
 NSString *integral;
 NSString *no;
+NSString *cash;
 }
 @property(nonatomic) UIImage *image;
 @property(nonatomic) NSString *image_url;
 @property(nonatomic) NSString *title;
 @property(nonatomic) NSString *integral;
 @property(nonatomic) NSString *no;
+@property(nonatomic) NSString *cash;
 @end
