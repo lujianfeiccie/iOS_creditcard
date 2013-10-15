@@ -236,7 +236,16 @@
     [SVProgressHUD dismiss];//消除等待提示
     
     if(error != Nil){
-        NSLog(@"%i",[error code]);
+        NSInteger code = [error code];
+        NSLog(@"%i %@",[error code],error);
+        switch (code) {
+            case NSURLErrorNotConnectedToInternet://网络断开
+                [SVProgressHUD showErrorWithStatus:@"无法连接到网络!"];
+                break;
+                
+            default:
+                break;
+        }
         return;
     }
     
