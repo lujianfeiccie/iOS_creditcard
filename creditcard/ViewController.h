@@ -23,6 +23,7 @@ UIAlertViewDelegate>
     HttpRequestTool* mHttpRequestTool; //远端请求工具类
     NSOperationQueue* queue; //异步队列，用于处理图片下载
     NSInteger selectedIndex; //保存已选中index
+    
 }
 @property (strong, nonatomic) NSMutableArray *list;
 @end

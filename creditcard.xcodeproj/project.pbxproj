@@ -18,6 +18,7 @@
 		18AE41BB17FE94F000B7770D /* Good.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BA17FE94F000B7770D /* Good.m */; };
 		18AE41BE17FEAB8500B7770D /* CellAndImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BD17FEAB8500B7770D /* CellAndImage.m */; };
 		18C6C58817FB28F400876454 /* HttpRequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6C58717FB28F400876454 /* HttpRequestTool.m */; };
+		18EC01DD18102C19005EE598 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC01DC18102C19005EE598 /* SearchView.m */; };
 		18F69E3D17F870AD0063A5BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E3C17F870AD0063A5BB /* Foundation.framework */; };
 		18F69E3F17F870AD0063A5BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */; };
 		18F69E4117F870AD0063A5BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E4017F870AD0063A5BB /* UIKit.framework */; };
@@ -74,6 +75,8 @@
 		18AE41BD17FEAB8500B7770D /* CellAndImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellAndImage.m; sourceTree = "<group>"; };
 		18C6C58617FB28F400876454 /* HttpRequestTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestTool.h; sourceTree = "<group>"; };
 		18C6C58717FB28F400876454 /* HttpRequestTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestTool.m; sourceTree = "<group>"; };
+		18EC01DB18102C19005EE598 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		18EC01DC18102C19005EE598 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		18F69E3917F870AD0063A5BB /* 积分兑换.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "积分兑换.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F69E3C17F870AD0063A5BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -188,6 +191,15 @@
 			name = HttpUtil;
 			sourceTree = "<group>";
 		};
+		18EC01DA18102BE4005EE598 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				18EC01DB18102C19005EE598 /* SearchView.h */,
+				18EC01DC18102C19005EE598 /* SearchView.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		18F69E3017F870AD0063A5BB = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +234,7 @@
 		18F69E4217F870AD0063A5BB /* creditcard */ = {
 			isa = PBXGroup;
 			children = (
+				18EC01DA18102BE4005EE598 /* UI */,
 				18359A1818008D78005E5A2A /* SVProgressHUD */,
 				183016E617F9D74C00ED6F9D /* Constants.h */,
 				183016E717F9D74C00ED6F9D /* Constants.m */,
@@ -410,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18EC01DD18102C19005EE598 /* SearchView.m in Sources */,
 				18AE41BB17FE94F000B7770D /* Good.m in Sources */,
 				183016E817F9D74C00ED6F9D /* Constants.m in Sources */,
 				18F69E8B17F878A70063A5BB /* SIMenuCell.m in Sources */,

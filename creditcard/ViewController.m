@@ -39,7 +39,8 @@
 
 //筛选对话框
 - (void) filterDlg {
-    
+    UIViewController* view = [[self storyboard] instantiateViewControllerWithIdentifier:@"searchview"];
+    [[self navigationController] pushViewController:view animated:YES];
 }
 - (void) initData{
     bank_array = [NSArray arrayWithObjects:@"平安银行", @"农业银行", @"中国银行", @"招商银行", nil];
