@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    _otherIntegralView.hidden = YES;
 	// Do any additional setup after loading the view.
     NSArray *array = [[NSArray alloc] initWithObjects:@"1-999",
                                                       @"1000-1999",
@@ -37,17 +37,10 @@
                                                       @">10000",
                                                       @"其它",nil];
     _pickerData = array;
-    if (_pickerView == nil) {
-        _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 240, 320, 460)];
-        _pickerView.delegate = self;
-        _pickerView.dataSource =self;
-        _pickerView.showsSelectionIndicator = YES;
-        _pickerView.hidden = YES;
-        [self.view addSubview:_pickerView];
-    }
-    
-    //加入关于按钮
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回"style:UIBarButtonItemStyleBordered target:self action:@selector(backbtnClick)];
+    _dataPicker.items = _pickerData;
+    _dataPicker.delegateForItemSelected = self;
+    //加入返回按钮
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回"style:UIBarButtonItemStylePlain target:self action:@selector(backbtnClick)];
     self.navigationItem.leftBarButtonItem = backButton;
     
     //加入筛选按钮
@@ -72,36 +65,22 @@
 }
 -(IBAction)IntegralSelect:(id)sender{
    // pickview_integral set
-      _pickerView.hidden = NO;
     NSLog(@"textfieldTouchUpInside");
 }
-//返回pickerview的组件数
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
-    return 1;
-}
+ 
 
-//返回每个组件上的行数
-- (NSInteger)pickerView:(UIPickerView *)thePickerView numberOfRowsInComponent:(NSInteger)component {
-    return [_pickerData count];
-}
 
-//设置每行显示的内容
-- (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [_pickerData objectAtIndex:row];
-    
-}
-
-//当你选中pickerview的某行时会调用该函数。
-
-- (void)pickerView:(UIPickerView *)thePickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSLog(@"You select row %d",row);
-    NSString* temp = [NSString stringWithFormat:@"%@",[_pickerData  objectAtIndex:row]];
-    [btnSelectIntegral setTitle:temp forState:UIControlStateNormal];
-
-    _pickerView.hidden = YES;
-}
--(IBAction)textfieldTouchUpOutside:(id)sender{
+ -(IBAction)textfieldTouchUpOutside:(id)sender{
     NSLog(@"textfieldTouchUpOutside");
      [txtTitle resignFirstResponder];
+}
+
+-(void)onItemSelected:(UICombox*) uiCombox Index:(NSInteger) index;{
+    NSLog(@"onItemSelected %i",index);
+    if (_pickerData.count == (index+1)) {
+        _otherIntegralView.hidden = NO;
+    }else{
+        _otherIntegralView.hidden = YES;
+    }
 }
 @end

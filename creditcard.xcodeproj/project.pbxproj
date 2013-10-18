@@ -18,6 +18,7 @@
 		18AE41BB17FE94F000B7770D /* Good.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BA17FE94F000B7770D /* Good.m */; };
 		18AE41BE17FEAB8500B7770D /* CellAndImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AE41BD17FEAB8500B7770D /* CellAndImage.m */; };
 		18C6C58817FB28F400876454 /* HttpRequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6C58717FB28F400876454 /* HttpRequestTool.m */; };
+		18CCFFD11810C1EC00C56DB5 /* UICombox.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CCFFD01810C1EC00C56DB5 /* UICombox.m */; };
 		18EC01DD18102C19005EE598 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC01DC18102C19005EE598 /* SearchView.m */; };
 		18F69E3D17F870AD0063A5BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E3C17F870AD0063A5BB /* Foundation.framework */; };
 		18F69E3F17F870AD0063A5BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */; };
@@ -75,6 +76,8 @@
 		18AE41BD17FEAB8500B7770D /* CellAndImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellAndImage.m; sourceTree = "<group>"; };
 		18C6C58617FB28F400876454 /* HttpRequestTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestTool.h; sourceTree = "<group>"; };
 		18C6C58717FB28F400876454 /* HttpRequestTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestTool.m; sourceTree = "<group>"; };
+		18CCFFCF1810C1EC00C56DB5 /* UICombox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICombox.h; sourceTree = "<group>"; };
+		18CCFFD01810C1EC00C56DB5 /* UICombox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICombox.m; sourceTree = "<group>"; };
 		18EC01DB18102C19005EE598 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		18EC01DC18102C19005EE598 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		18F69E3917F870AD0063A5BB /* 积分兑换.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "积分兑换.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +181,8 @@
 				18AE41BA17FE94F000B7770D /* Good.m */,
 				18AE41BC17FEAB8500B7770D /* CellAndImage.h */,
 				18AE41BD17FEAB8500B7770D /* CellAndImage.m */,
+				18CCFFCF1810C1EC00C56DB5 /* UICombox.h */,
+				18CCFFD01810C1EC00C56DB5 /* UICombox.m */,
 			);
 			name = Custom;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 				18F69E8917F878A70063A5BB /* SICellSelection.m in Sources */,
 				1814AE8E17FEEADF003C4E45 /* ImageHelper.m in Sources */,
 				18F69E8F17F878A70063A5BB /* UIColor+Extension.m in Sources */,
+				18CCFFD11810C1EC00C56DB5 /* UICombox.m in Sources */,
 				18F69E4917F870AD0063A5BB /* main.m in Sources */,
 				18F69E8A17F878A70063A5BB /* SIMenuButton.m in Sources */,
 				18AE41BE17FEAB8500B7770D /* CellAndImage.m in Sources */,

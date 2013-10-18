@@ -7,15 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SearchView : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource>
+#import "UICombox.h"
+@interface SearchView : UIViewController<UIComboxDelegate>
 {
     __weak IBOutlet UITextField *txtTitle;
-    __weak IBOutlet UIButton *btnSelectIntegral;
 
 }
 -(IBAction)IntegralSelect:(id)sender;
 -(IBAction)textfieldTouchUpOutside:(id)sender;
 @property (strong, nonatomic) NSArray *pickerData;
-@property (retain, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UICombox *dataPicker;
+@property (weak, nonatomic) IBOutlet UIView *otherIntegralView;
 @end
