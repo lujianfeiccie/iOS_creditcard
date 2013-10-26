@@ -22,8 +22,12 @@ UIAlertViewDelegate>
     UITableView *mUITableView; //列表
     HttpRequestTool* mHttpRequestTool; //远端请求工具类
     NSOperationQueue* queue; //异步队列，用于处理图片下载
-    NSInteger selectedIndex; //保存已选中index
-    
+    NSInteger selectedIndex; //保存已选中index for CellItem
+    BOOL flagRefresh;
+    BOOL loadingMore;
+    NSInteger page;
+    NSInteger count;
+    NSInteger selectedBankIndex;
 }
 @property (strong, nonatomic) NSMutableArray *list;
 @end

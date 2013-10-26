@@ -28,7 +28,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     NSLog(@"viewDidLoad");
     [self initData];
-    
 }
 //关于对话框
 - (void) aboutDlg {
@@ -43,6 +42,11 @@
     [[self navigationController] pushViewController:view animated:YES];
 }
 - (void) initData{
+    flagRefresh = NO;
+    loadingMore = NO;
+    page = 1;   //第一页
+    count = 10; //每页大小为十条数据
+    selectedBankIndex = 0;
     bank_array = [NSArray arrayWithObjects:@"平安银行", @"农业银行", @"中国银行", @"招商银行", nil];
     
     mHttpRequestTool = [HttpRequestTool alloc]; //初始化HTTP请求类
@@ -72,14 +76,15 @@
     [mUITableView setDataSource:self];
     [self.view addSubview:mUITableView];
     
-    //加入List
+    [self createTableFooter]; //加入footer
+         //加入List
     NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
     self.list = MutableArray;
     
     //初始化异步队列线程类
     queue = [[NSOperationQueue alloc] init];
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear]; //弹出等待提示
+   
     [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -216,13 +221,21 @@
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
     [queue cancelAllOperations];//取消所有操作
+    page = 1;
+    
     [self requestData:[ self getTypeId:index ]];
 }
 
 //请求服务器数据
 -(void)requestData:(NSUInteger)index{
     
-    NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=10&page=1",API_URL,index];
+    if (loadingMore) {
+        return;
+    }
+     ++page;
+    loadingMore = YES;
+     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear]; //弹出等待提示
+    NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=%i&page=1",API_URL,index,count*page];
     mHttpRequestTool.url = request_url;
     
     //NSThread* myThread = [[NSThread alloc] initWithTarget:self selector:@selector(threafunc) object:nil];
@@ -230,12 +243,61 @@
     [myThread start];
 }
 
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    NSLog(@"offset y=%f bounds.height=%f size1.height=%f",offset.y,bounds.size.height,size.height);
+    float y1 = offset.y + bounds.size.height;
+    float h1 = size.height;
+    float offset_pull_up = 100;//上拉的偏移量
+    if ((y1 - h1) > offset_pull_up) {
+        flagRefresh = YES;
+    }
+    else {
+        flagRefresh = NO;
+    }
+    if(flagRefresh){
+     
+    NSLog(@"上拉刷新");
+        [self requestData:[self getTypeId:menu.selectedIndex]];
+    }else{
+        NSLog(@"取消刷新");
+       
+    }
+}
 
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+// 创建表格底部
+- (void) createTableFooter
+{
+    mUITableView.tableFooterView = nil;
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 40.0f)];
+    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 116.0f, 40.0f)];
+    [loadMoreText setCenter:tableFooterView.center];
+    [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];
+    [loadMoreText setText:@"上拉显示更多数据"];
+    [tableFooterView addSubview:loadMoreText];
+    
+    mUITableView.tableFooterView = tableFooterView;
+    [mUITableView.tableFooterView setHidden:YES];
+}
 //回调方法,接收http返回json数据
 -(void)onMsgReceive :(NSData*) msg :(NSError*) error
 {
     [SVProgressHUD dismiss];//消除等待提示
     
+  [mUITableView.tableFooterView setHidden:NO];//让Footer显示出来 
+    
+    loadingMore = NO;
+    if(selectedBankIndex != menu.selectedIndex){ //切换银行时，回到顶部
+        CGPoint point = CGPointMake(0, 0);
+        [mUITableView setContentOffset:point]; //回到顶端
+        
+        selectedBankIndex = menu.selectedIndex;
+    }
     if(error != Nil){
         NSInteger code = [error code];
         NSLog(@"%i %@",[error code],error);

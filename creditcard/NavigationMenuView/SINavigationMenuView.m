@@ -18,7 +18,7 @@
 @end
 
 @implementation SINavigationMenuView
-
+@synthesize selectedIndex;
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title
 {
     self = [super initWithFrame:frame];
@@ -29,6 +29,7 @@
         [self.menuButton addTarget:self action:@selector(onHandleMenuTap:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.menuButton];
     }
+    selectedIndex = 0;
     return self;
 }
 
@@ -83,6 +84,7 @@
 {
     self.menuButton.isActive = !self.menuButton.isActive;
     [self onHandleMenuTap:nil];
+    selectedIndex = index;
     [self.delegate didSelectItemAtIndex:index];
 }
 
