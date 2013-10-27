@@ -95,11 +95,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="dataPicker" destination="pO9-F9-661" id="xSA-II-qPr"/>
                         <outlet property="otherIntegralView" destination="r0Y-8z-lb1" id="Rgo-ex-iA9"/>
                         <outlet property="txtIntegral" destination="pO9-F9-661" id="W3b-B4-7UO"/>
-                        <outlet property="txtMaxIntegral" destination="tO2-VE-9pN" id="do1-CU-tBe"/>
-                        <outlet property="txtMinIntegral" destination="s6F-iY-64Z" id="Kxd-de-eHP"/>
+                        <outlet property="txtMaxIntegral" destination="s6F-iY-64Z" id="I1P-m8-N9X"/>
+                        <outlet property="txtMinIntegral" destination="tO2-VE-9pN" id="RSK-lr-m40"/>
                         <outlet property="txtTitle" destination="7Qf-rU-sju" id="EOe-yF-btR"/>
                     </connections>
                 </viewController>

@@ -16,7 +16,7 @@
 @synthesize no;
 @synthesize cash;
 -(id) init{
-    NSLog(@"good init");
+   // NSLog(@"Good-good init");
     image = Nil;
     image_url = @"";
     title = @"";

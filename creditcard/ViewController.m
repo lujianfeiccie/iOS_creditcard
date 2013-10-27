@@ -43,6 +43,9 @@
     [[self navigationController] pushViewController:view animated:YES];
 }
 - (void) initData{
+    title = @"";
+    minIntegral = 0;
+    maxIntegral = 0;
     flagRefresh = NO;
     loadingMore = NO;
     page = 1;   //第一页
@@ -78,6 +81,7 @@
     [self.view addSubview:mUITableView];
     
     [self createTableFooter]; //加入footer
+    [mUITableView.tableFooterView setHidden:YES]; //刚开始先隐藏
          //加入List
     NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
     self.list = MutableArray;
@@ -89,7 +93,7 @@
     [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSLog(@"numberOfRowsInSection");
+    //NSLog(@"numberOfRowsInSection");
     return [self.list count];
 }
 
@@ -111,7 +115,7 @@
 //Cell适配, 给每项Cell赋值
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cellForRowAtIndexPath");
+   // NSLog(@"cellForRowAtIndexPath");
     
     static NSString *CustomCellIdentifier = @"CustomCellIdentifier";
     
@@ -218,12 +222,9 @@
 //回调方法,下拉框
 - (void)didSelectItemAtIndex:(NSUInteger)index{
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
-    [queue cancelAllOperations];//取消所有操作
-    page = 1;
-    
+    [self changeSelection];
     [self requestData:[ self getTypeId:index ]];
 }
 
@@ -235,8 +236,19 @@
     }
      ++page;
     loadingMore = YES;
-     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear]; //弹出等待提示
+    [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+    
     NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=%i&page=1",API_URL,index,count*page];
+    
+    if(minIntegral !=0 && maxIntegral != 0 && maxIntegral>minIntegral){ //追加积分条件
+        request_url = [NSString stringWithFormat:@"%@&low_integral=%i&high_integral=%i",request_url,minIntegral,maxIntegral];
+    }
+    
+    if(![title isEqual:Nil] && ![title isEqual:@"(null)"]){
+          request_url = [NSString stringWithFormat:@"%@&good_name=%@",request_url,[title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    NSLog(@"%@",request_url);
     mHttpRequestTool.url = request_url;
     
     //NSThread* myThread = [[NSThread alloc] initWithTarget:self selector:@selector(threafunc) object:nil];
@@ -248,7 +260,7 @@
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
     CGSize size = scrollView.contentSize;
-    NSLog(@"offset y=%f bounds.height=%f size1.height=%f",offset.y,bounds.size.height,size.height);
+   // NSLog(@"offset y=%f bounds.height=%f size1.height=%f",offset.y,bounds.size.height,size.height);
     float y1 = offset.y + bounds.size.height;
     float h1 = size.height;
     float offset_pull_up = 100;//上拉的偏移量
@@ -260,10 +272,10 @@
     }
     if(flagRefresh){
      
-    NSLog(@"上拉刷新");
+    //NSLog(@"上拉刷新");
         [self requestData:[self getTypeId:menu.selectedIndex]];
     }else{
-        NSLog(@"取消刷新");
+       // NSLog(@"取消刷新");
        
     }
 }
@@ -275,16 +287,31 @@
 - (void) createTableFooter
 {
     mUITableView.tableFooterView = nil;
-    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 40.0f)];
-    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 116.0f, 40.0f)];
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 90.0f)];
+    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 116.0f, 80.0f)];
     [loadMoreText setCenter:tableFooterView.center];
     [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];
-    [loadMoreText setText:@"上拉显示更多数据"];
+    [loadMoreText setText:@"上拉获取更多信息"];
     [tableFooterView addSubview:loadMoreText];
     
     mUITableView.tableFooterView = tableFooterView;
-    [mUITableView.tableFooterView setHidden:YES];
+ 
 }
+// 创建表格底部
+- (void) createTableFooter:(NSString*) footer_title;
+{
+    mUITableView.tableFooterView = nil;
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 90.0f)];
+    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 116.0f, 80.0f)];
+    [loadMoreText setCenter:tableFooterView.center];
+    [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];
+    [loadMoreText setText:footer_title];
+    [tableFooterView addSubview:loadMoreText];
+    
+    mUITableView.tableFooterView = tableFooterView;
+    
+}
+
 //回调方法,接收http返回json数据
 -(void)onMsgReceive :(NSData*) msg :(NSError*) error
 {
@@ -306,7 +333,9 @@
             case NSURLErrorNotConnectedToInternet://网络断开
                 [SVProgressHUD showErrorWithStatus:@"无法连接到网络!"];
                 break;
-                
+            case NSURLErrorTimedOut://请求超时
+                 [SVProgressHUD showErrorWithStatus:@"请求超时!"];
+                break;
             default:
                 break;
         }
@@ -348,11 +377,28 @@
         [self.list addObject:good];//加入到list
     }
     
+    if(data.count==0){
+        [self createTableFooter:@"没有相关信息"];
+    }else{
+        [self createTableFooter:@"上拉获取更多信息"];
+    }
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];//主线程更新列表数据
     
     
 }
 -(void)passValue:(UserEntity *)value{
-    NSLog(@"%@ %i %i",value.title,value.minIntegral,value.maxIntegral);
+    NSLog(@"%@ min %i max %i",value.title,value.minIntegral,value.maxIntegral);
+    [self changeSelection];
+    title = value.title;
+    minIntegral = value.minIntegral;
+    maxIntegral = value.maxIntegral;
+    [self requestData:[self getTypeId:menu.selectedIndex]];
+}
+-(void) changeSelection{
+    [queue cancelAllOperations];//取消所有操作
+    page = 1;
+    title = @"";
+    minIntegral = 0;
+    maxIntegral = 0;
 }
 @end

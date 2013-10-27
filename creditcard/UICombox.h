@@ -17,6 +17,7 @@
 
 @interface UICombox : UITextField<UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
+    NSUInteger selectedIndex;
 @private
     UIActionSheet *action;
     UIPickerView *picker;
@@ -24,5 +25,6 @@
 }
 @property(nonatomic, copy) NSArray *items;
 @property(nonatomic, retain) id<UIComboxDelegate> delegateForItemSelected;
+@property(nonatomic,assign,setter = setSelectedIndex:)  NSUInteger selectedIndex;
 - (void)initComponents;
 @end

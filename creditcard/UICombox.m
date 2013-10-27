@@ -11,12 +11,14 @@
 @implementation UICombox
 @synthesize delegateForItemSelected;
 @synthesize items;
+@synthesize selectedIndex;
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
     }
+    selectedIndex = -1;
     return self;
 }
 -(void) didMoveToWindow {
@@ -79,11 +81,20 @@
 - (void)doDoneClick:(id)sender{
     [action dismissWithClickedButtonIndex:1  animated:YES];
     NSInteger index = [picker selectedRowInComponent:0];
+    selectedIndex = index;
     //设置输入框内容
     [self setText:[items objectAtIndex:index]];
     if(delegateForItemSelected!=nil){
         [delegateForItemSelected onItemSelected:self Index:index];
     }
+}
+-(void)setSelectedIndex:(NSUInteger)_selectedIndex
+{
+    NSLog(@"UICombox-setSelectedIndex %i %i %@",selectedIndex);
+    [picker selectRow:selectedIndex inComponent:0 animated:NO];
+    selectedIndex = _selectedIndex;
+         //设置输入框内容
+    [self setText:[items objectAtIndex:_selectedIndex]];
 }
 - (BOOL)canBecomeFirstResponder {
     return YES;

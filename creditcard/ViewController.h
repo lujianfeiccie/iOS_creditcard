@@ -30,6 +30,9 @@ PassValueDelegate>
     NSInteger page;
     NSInteger count;
     NSInteger selectedBankIndex;
+    NSString* title;
+    NSUInteger maxIntegral;
+    NSUInteger minIntegral;
 }
 @property (strong, nonatomic) NSMutableArray *list;
 @end
