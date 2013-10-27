@@ -10,12 +10,14 @@
 #import <UIKit/UIPasteboard.h>
 #import"SINavigationMenuView.h"
 #import "HttpRequestTool.h"
+#import "SearchView.h"
 @interface ViewController : UIViewController
 <SINavigationMenuDelegate,
 UITableViewDataSource,
 UITableViewDelegate,
 HttpRequestToolDelegate,
-UIAlertViewDelegate>
+UIAlertViewDelegate,
+PassValueDelegate>
 {
     NSArray *bank_array; //存放银行列表信息
     SINavigationMenuView *menu;//下拉菜单

@@ -38,7 +38,8 @@
 
 //筛选对话框
 - (void) filterDlg {
-    UIViewController* view = [[self storyboard] instantiateViewControllerWithIdentifier:@"searchview"];
+    SearchView* view = [[self storyboard] instantiateViewControllerWithIdentifier:@"searchview"];
+    view.delegate = self;
     [[self navigationController] pushViewController:view animated:YES];
 }
 - (void) initData{
@@ -351,5 +352,7 @@
     
     
 }
-
+-(void)passValue:(UserEntity *)value{
+    NSLog(@"%@ %i %i",value.title,value.minIntegral,value.maxIntegral);
+}
 @end

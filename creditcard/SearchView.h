@@ -8,14 +8,37 @@
 
 #import <UIKit/UIKit.h>
 #import "UICombox.h"
+
+@interface UserEntity : NSObject //用户传值实体类
+{
+    NSString *title;
+    NSUInteger maxIntegral;
+    NSUInteger minIntegral;
+}
+@property (strong, nonatomic) NSString *title;
+@property(assign) NSUInteger maxIntegral;
+@property(assign) NSUInteger minIntegral;
+@end
+
+@protocol PassValueDelegate <NSObject> //传值协议
+-(void)passValue:(UserEntity *)value;
+@end
+
 @interface SearchView : UIViewController<UIComboxDelegate>
 {
     __weak IBOutlet UITextField *txtTitle;
-
+    NSUInteger maxIntegral;
+    NSUInteger minIntegral;
 }
 -(IBAction)IntegralSelect:(id)sender;
 -(IBAction)textfieldTouchUpOutside:(id)sender;
 @property (strong, nonatomic) NSArray *pickerData;
 @property (weak, nonatomic) IBOutlet UICombox *dataPicker;
 @property (weak, nonatomic) IBOutlet UIView *otherIntegralView;
+@property id<PassValueDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UITextField *txtTitle;
+@property (weak, nonatomic) IBOutlet UICombox *txtIntegral;
+@property (weak, nonatomic) IBOutlet UITextField *txtMaxIntegral;
+@property (weak, nonatomic) IBOutlet UITextField *txtMinIntegral;
+
 @end
