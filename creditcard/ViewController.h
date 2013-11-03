@@ -45,6 +45,12 @@ EGORefreshTableHeaderDelegate>
     EGORefreshTableHeaderView *_refreshHeaderView;
     BOOL _reloading;
     PULL_State state ;
+    
+    UIView *tableFooterView; //底部视图
+    UILabel *loadMoreText; //标签
+    UIActivityIndicatorView* activityIndicatorView;//底部动画
+    
+    NSInteger last_index_for_image;
 }
 @property (strong, nonatomic) NSMutableArray *list;
 - (void)reloadTableViewDataSource;

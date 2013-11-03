@@ -153,9 +153,16 @@ typedef NS_ENUM(NSInteger, Test1) {
         NSData *udObject = [NSKeyedArchiver archivedDataWithRootObject:value];
         [ud setObject:udObject forKey:@"UserEntity"];
         
-        [_delegate passValue:value];
+      
         [[self navigationController] popViewControllerAnimated:YES];
+        [_delegate passValue:value];
+        _delegate = nil;
     }
+}
+-(void) viewDidDisappear:(BOOL)animated{
+    NSLog(@"SearchView======viewDidDisappear");
+    txtTitle = nil;
+    _delegate = nil;
 }
 -(IBAction)IntegralSelect:(id)sender{
    // pickview_integral set
@@ -233,4 +240,5 @@ typedef NS_ENUM(NSInteger, Test1) {
     //其他的类型不需要检测，直接写入
     return YES;
 }
+
 @end

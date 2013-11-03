@@ -38,6 +38,7 @@
 
 //筛选对话框
 - (void) filterDlg {
+    [self changeSelection];
     SearchView* view = [[self storyboard] instantiateViewControllerWithIdentifier:@"searchview"];
     view.delegate = self;
     [[self navigationController] pushViewController:view animated:YES];
@@ -94,7 +95,7 @@
 	}
 
     
-    [self createTableFooter]; //加入footer
+    [self createTableFooter:INIT_FOOTER_TEXT:NO]; //加入footer
     [mUITableView.tableFooterView setHidden:YES]; //刚开始先隐藏
          //加入List
     NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
@@ -114,6 +115,14 @@
 
 //下载图片
 -(void) downloadImage:(CellAndImage*) mCellAndImage{
+    @synchronized(self) //加入同步锁
+    {
+    NSLog(@"last_index_for_image=%i index=%i",last_index_for_image,mCellAndImage.index);
+    if (last_index_for_image == mCellAndImage.index) {
+        NSLog(@"SAME");
+        return;
+    }
+    last_index_for_image = mCellAndImage.index;
     NSURL *imageUrl = [NSURL URLWithString:mCellAndImage.image_url];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
     
@@ -122,9 +131,15 @@
     UIImage* after_image = [ImageHelper image:image fitInSize:mCGSize];
     
     [[self.list objectAtIndex:mCellAndImage.index] setImage:after_image];
-    [mCellAndImage.cell setImage:after_image];
+
+    NSLog(@"mCellAndImage.index=%i [self.list count]=%i",mCellAndImage.index, [self.list count]);
     //即时更新
+    
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+ 
+    image = nil;
+    after_image = nil;
+    }
 }
 
 //Cell适配, 给每项Cell赋值
@@ -150,6 +165,7 @@
     
     [cell initStyle];
     [cell setTitle:good.title];
+    
     NSString* temp_integral = @"";
     if ([good.cash floatValue] == 0.0f) {
         temp_integral = [NSString stringWithFormat:@"%@",good.integral];
@@ -157,6 +173,7 @@
         temp_integral = [NSString stringWithFormat:@"%@ ￥%@",good.integral,good.cash];
     }
     [cell setIntegral:temp_integral];
+  
     [cell setNo:good.no];
     
     //图片处理
@@ -172,6 +189,7 @@
         //更新图片
         [cell setImage:good.image];
     }
+    
     
     return cell;
 }
@@ -240,7 +258,8 @@
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
     [self changeSelection];
-    [self requestData:[ self getTypeId:index ]];
+    [self showIsLoading];
+ //   [self requestData:[ self getTypeId:index ]];
 }
 
 //请求服务器数据
@@ -318,33 +337,40 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 // 创建表格底部
-- (void) createTableFooter
+- (void) createTableFooter:(NSString*) footer_title : (BOOL) loading;
 {
-    mUITableView.tableFooterView = nil;
-    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 90.0f)];
-    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 116.0f, 80.0f)];
-    [loadMoreText setCenter:tableFooterView.center];
-    [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];
-    [loadMoreText setText:@"上拉获取更多信息"];
-    [tableFooterView addSubview:loadMoreText];
-    
-    mUITableView.tableFooterView = tableFooterView;
- 
-}
-// 创建表格底部
-- (void) createTableFooter:(NSString*) footer_title;
-{
-    mUITableView.tableFooterView = nil;
-    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 90.0f)];
-    UILabel *loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 116.0f, 80.0f)];
-    [loadMoreText setCenter:tableFooterView.center];
-    [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];
-    [loadMoreText setText:footer_title];
-    [tableFooterView addSubview:loadMoreText];
-    
-    mUITableView.tableFooterView = tableFooterView;
-    
+    if (tableFooterView==Nil ) {
+        tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 60.0f)];
+        if(loadMoreText==nil){
+            loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 60.0f)];
+            [loadMoreText setCenter:tableFooterView.center];
+            [loadMoreText setFont:[UIFont fontWithName:@"Helvetica Neue" size:14]];
+            [loadMoreText setText:footer_title];
+            [tableFooterView addSubview:loadMoreText];
+        }
+        if (activityIndicatorView==nil) {
+            activityIndicatorView = [ [ UIActivityIndicatorView alloc ]
+                                     initWithFrame:CGRectMake(self.view.bounds.size.width-50.0,14,30.0,30.0)];
+            activityIndicatorView.activityIndicatorViewStyle= UIActivityIndicatorViewStyleGray;
+            [tableFooterView addSubview:activityIndicatorView];
+            if (loading) {
+                 [activityIndicatorView startAnimating];
+            }else{
+                [activityIndicatorView stopAnimating];
+            }
+           
+        }
+       mUITableView.tableFooterView = tableFooterView;
+    }else{
+       [loadMoreText setText:footer_title];
+        if (loading) {
+            [activityIndicatorView startAnimating];
+        }else{
+            [activityIndicatorView stopAnimating];
+        }
+    }
 }
 
 //回调方法,接收http返回json数据
@@ -354,7 +380,7 @@
     [SVProgressHUD dismiss];//消除等待提示
     [self doneLoadingTableViewData];
     [mUITableView.tableFooterView setHidden:NO];//让Footer显示出来
-    
+   // [self createTableFooter:INIT_FOOTER_TEXT :YES];
     loadingMore = NO;
     if(selectedBankIndex != menu.selectedIndex){ //切换银行时，回到顶部
         CGPoint point = CGPointMake(0, 0);
@@ -415,9 +441,9 @@
     
     if(data.count==0){
         noNeedToLoad = YES;
-        [self createTableFooter:@"没有相关信息"];
+        [self createTableFooter:INIT_FOOTER_NO_CONTENT_TEXT:NO];
     }else{
-        [self createTableFooter:@"上拉获取更多信息"];
+        [self createTableFooter:INIT_FOOTER_TEXT:NO];
         [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"共%i条信息,亲", data.count]];
     }
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];//主线程更新列表数据
@@ -428,7 +454,7 @@
     NSLog(@"%@ min %i max %i",value.title,value.minIntegral,value.maxIntegral);
     noNeedToLoad = NO;
     _reloading = NO;
-    [self changeSelection];
+
     title = value.title;
     minIntegral = value.minIntegral;
     maxIntegral = value.maxIntegral;
@@ -436,6 +462,8 @@
 }
 -(void) changeSelection{
     [queue cancelAllOperations];//取消所有操作
+    queue = nil;
+    queue = [[NSOperationQueue alloc] init];
     page = 1;
     title = @"";
     minIntegral = 0;
@@ -507,6 +535,12 @@
         [SVProgressHUD showErrorWithStatus:@"没有信息了，亲!"];
         return;
     }
+    [self createTableFooter:INIT_FOOTER_GETING_CONTENT_TEXT :YES];
     [self requestData:[self getTypeId:menu.selectedIndex]];
 }
+
+- (void) viewDidDisappear:(BOOL)animated{
+    NSLog(@"viewDidDisappear");
+}
+
 @end

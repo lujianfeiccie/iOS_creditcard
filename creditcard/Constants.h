@@ -12,5 +12,8 @@ extern NSInteger const CELL_IMAGE_LEFT;
 extern NSInteger const CELL_IMAGE_TOP;
 extern NSInteger const CELL_IMAGE_WIDTH;
 extern NSInteger const CELL_IMAGE_HEIGHT;
+extern NSString *const INIT_FOOTER_TEXT;
+extern NSString *const INIT_FOOTER_NO_CONTENT_TEXT;
+extern NSString *const INIT_FOOTER_GETING_CONTENT_TEXT;
 @interface Constants : NSObject
 @end

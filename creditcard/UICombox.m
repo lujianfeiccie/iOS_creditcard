@@ -17,8 +17,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+            selectedIndex = -1;
     }
-    selectedIndex = -1;
     return self;
 }
 -(void) didMoveToWindow {
@@ -90,7 +90,7 @@
 }
 -(void)setSelectedIndex:(NSUInteger)_selectedIndex
 {
-    NSLog(@"UICombox-setSelectedIndex %i %i %@",selectedIndex);
+    NSLog(@"UICombox-setSelectedIndex %i ",selectedIndex);
     [picker selectRow:selectedIndex inComponent:0 animated:NO];
     selectedIndex = _selectedIndex;
          //设置输入框内容
