@@ -48,9 +48,11 @@
     maxIntegral = 0;
     flagRefresh = NO;
     loadingMore = NO;
+    noNeedToLoad = NO;
     page = 1;   //第一页
     count = 10; //每页大小为十条数据
     selectedBankIndex = 0;
+    state = PULL_UPDATING;
     bank_array = [NSArray arrayWithObjects:@"平安银行", @"农业银行", @"中国银行", @"招商银行", nil];
     
     mHttpRequestTool = [HttpRequestTool alloc]; //初始化HTTP请求类
@@ -80,6 +82,18 @@
     [mUITableView setDataSource:self];
     [self.view addSubview:mUITableView];
     
+    //加入下拉刷新的header view
+    if (_refreshHeaderView == nil) {
+		
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f - mUITableView.bounds.size.height, self.view.frame.size.width, mUITableView.bounds.size.height)];
+		view.delegate = self;
+        [mUITableView  setSectionHeaderHeight:0.0f];
+		[mUITableView addSubview:view];
+		_refreshHeaderView = view;
+		view = nil;
+	}
+
+    
     [self createTableFooter]; //加入footer
     [mUITableView.tableFooterView setHidden:YES]; //刚开始先隐藏
          //加入List
@@ -89,8 +103,9 @@
     //初始化异步队列线程类
     queue = [[NSOperationQueue alloc] init];
     
-   
-    [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
+  // [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+    [self showIsLoading];
+   // [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     //NSLog(@"numberOfRowsInSection");
@@ -221,7 +236,7 @@
 
 //回调方法,下拉框
 - (void)didSelectItemAtIndex:(NSUInteger)index{
-    
+    noNeedToLoad = NO;
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
     [self changeSelection];
@@ -230,14 +245,25 @@
 
 //请求服务器数据
 -(void)requestData:(NSUInteger)index{
-    
+    NSLog(@"requestData %i %i %i",index,loadingMore,_reloading);
     if (loadingMore) {
+        
         return;
     }
-     ++page;
-    loadingMore = YES;
-    [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+    if(_reloading){
+        
+        return;
+    }
+    // [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+
     
+    if (state == PULL_MORE_LOADING) {
+         ++page;
+        loadingMore = YES;
+    }else if (state == PULL_UPDATING){
+        
+    }
+   
     NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=%i&page=1",API_URL,index,count*page];
     
     if(minIntegral !=0 && maxIntegral != 0 && maxIntegral>minIntegral){ //追加积分条件
@@ -245,7 +271,7 @@
     }
     
     if(![title isEqual:Nil] && ![title isEqual:@"(null)"]){
-          request_url = [NSString stringWithFormat:@"%@&good_name=%@",request_url,[title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        request_url = [NSString stringWithFormat:@"%@&good_name=%@",request_url,[title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     
     NSLog(@"%@",request_url);
@@ -254,9 +280,12 @@
     //NSThread* myThread = [[NSThread alloc] initWithTarget:self selector:@selector(threafunc) object:nil];
     NSThread* myThread = [[NSThread alloc] initWithTarget:mHttpRequestTool selector:@selector(startRequest) object:nil];
     [myThread start];
+    
 }
 
 -(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
     CGSize size = scrollView.contentSize;
@@ -271,13 +300,19 @@
         flagRefresh = NO;
     }
     if(flagRefresh){
-     
+        
     //NSLog(@"上拉刷新");
-        [self requestData:[self getTypeId:menu.selectedIndex]];
+       state = PULL_MORE_LOADING;
+       [self reloadTableViewDataSourceWhenPullUp];
     }else{
        // NSLog(@"取消刷新");
-       
     }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    NSLog(@"scrollViewDidEndDragging");
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -315,9 +350,10 @@
 //回调方法,接收http返回json数据
 -(void)onMsgReceive :(NSData*) msg :(NSError*) error
 {
+    NSLog(@"onMsgReceive");
     [SVProgressHUD dismiss];//消除等待提示
-    
-  [mUITableView.tableFooterView setHidden:NO];//让Footer显示出来 
+    [self doneLoadingTableViewData];
+    [mUITableView.tableFooterView setHidden:NO];//让Footer显示出来
     
     loadingMore = NO;
     if(selectedBankIndex != menu.selectedIndex){ //切换银行时，回到顶部
@@ -378,21 +414,25 @@
     }
     
     if(data.count==0){
+        noNeedToLoad = YES;
         [self createTableFooter:@"没有相关信息"];
     }else{
         [self createTableFooter:@"上拉获取更多信息"];
+        [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"共%i条信息,亲", data.count]];
     }
     [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];//主线程更新列表数据
     
     
 }
--(void)passValue:(UserEntity *)value{
+-(void)passValue:(UserEntity *)value{ //从筛选界面过来
     NSLog(@"%@ min %i max %i",value.title,value.minIntegral,value.maxIntegral);
+    noNeedToLoad = NO;
+    _reloading = NO;
     [self changeSelection];
     title = value.title;
     minIntegral = value.minIntegral;
     maxIntegral = value.maxIntegral;
-    [self requestData:[self getTypeId:menu.selectedIndex]];
+    [self showIsLoading];
 }
 -(void) changeSelection{
     [queue cancelAllOperations];//取消所有操作
@@ -400,5 +440,73 @@
     title = @"";
     minIntegral = 0;
     maxIntegral = 0;
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+	
+	//  should be calling your tableviews data source model to reload
+	//  put here just for demo
+     [self requestData:[self getTypeId:menu.selectedIndex]];
+    _reloading = YES;
+    NSLog(@"reloadTableViewDataSource");
+	
+}
+
+- (void)doneLoadingTableViewData{
+	
+	//  model should call this when its done loading
+	_reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:mUITableView];
+    NSLog(@"doneLoadingTableViewData");
+}
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+	
+	[self reloadTableViewDataSource];
+	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];//搞定就调用doneLoadingTableViewData
+    NSLog(@"egoRefreshTableHeaderDidTriggerRefresh");
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+    //NSLog(@"egoRefreshTableHeaderDataSourceIsLoading");
+	return _reloading; // should return if data source model is reloading
+	
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+    NSLog(@"egoRefreshTableHeaderDataSourceLastUpdated");
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+	
+    //NSLog(@"titleForHeaderInSection");
+	return [NSString stringWithFormat:@"Section %i", section];
+	
+}
+
+- (void) showIsLoading{
+    state = PULL_UPDATING;
+    [_refreshHeaderView setState:EGOOPullRefreshLoading];
+    [mUITableView setContentOffset:CGPointMake(0, -80) animated:YES];
+    UIScrollView* mScrollView = [[UIScrollView alloc] init];
+    [mScrollView setContentOffset:CGPointMake(0, -80.0f)];//仅仅为了模拟满足条件的情况
+     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:mScrollView];
+    mScrollView = nil;
+}
+
+- (void) reloadTableViewDataSourceWhenPullUp{
+    if (noNeedToLoad) {
+        [SVProgressHUD showErrorWithStatus:@"没有信息了，亲!"];
+        return;
+    }
+    [self requestData:[self getTypeId:menu.selectedIndex]];
 }
 @end
