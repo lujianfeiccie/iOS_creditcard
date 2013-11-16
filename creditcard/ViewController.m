@@ -101,12 +101,12 @@
     NSMutableArray *MutableArray = [[NSMutableArray alloc] init];
     self.list = MutableArray;
     
+    urlDict = [[NSMutableDictionary alloc] init];//url字典
     //初始化异步队列线程类
     queue = [[NSOperationQueue alloc] init];
     
-  // [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
-    [self showIsLoading];
-   // [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
+   [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+    [self requestData:[ self getTypeId:0]];//一开始就加入平安银行的数据
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     //NSLog(@"numberOfRowsInSection");
@@ -115,31 +115,28 @@
 
 //下载图片
 -(void) downloadImage:(CellAndImage*) mCellAndImage{
-    @synchronized(self) //加入同步锁
-    {
-    NSLog(@"last_index_for_image=%i index=%i",last_index_for_image,mCellAndImage.index);
-    if (last_index_for_image == mCellAndImage.index) {
-        NSLog(@"SAME");
-        return;
+    
+    if ([urlDict objectForKey:mCellAndImage.image_url]==nil) {
+        NSLog(@"url=%@",mCellAndImage.image_url);
+        [urlDict setObject:mCellAndImage.image_url forKey:mCellAndImage.image_url];
+        
+        NSURL *imageUrl = [NSURL URLWithString:mCellAndImage.image_url];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+        
+        //压缩图片
+        CGSize mCGSize = CGSizeMake(CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT);
+        UIImage* after_image = [ImageHelper image:image fitInSize:mCGSize];
+        
+        [[self.list objectAtIndex:mCellAndImage.index] setImage:after_image];
+        
+        //即时更新
+        
+        [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+        
+        image = nil;
+        after_image = nil;
     }
-    last_index_for_image = mCellAndImage.index;
-    NSURL *imageUrl = [NSURL URLWithString:mCellAndImage.image_url];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
-    
-    //压缩图片
-    CGSize mCGSize = CGSizeMake(CELL_IMAGE_WIDTH, CELL_IMAGE_HEIGHT);
-    UIImage* after_image = [ImageHelper image:image fitInSize:mCGSize];
-    
-    [[self.list objectAtIndex:mCellAndImage.index] setImage:after_image];
-
-    NSLog(@"mCellAndImage.index=%i [self.list count]=%i",mCellAndImage.index, [self.list count]);
-    //即时更新
-    
-    [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
- 
-    image = nil;
-    after_image = nil;
-    }
+   
 }
 
 //Cell适配, 给每项Cell赋值
@@ -258,8 +255,8 @@
     NSString* bank = bank_array[index];
     [menu setTitle:bank];
     [self changeSelection];
-    [self showIsLoading];
- //   [self requestData:[ self getTypeId:index ]];
+    [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+    [self requestData:[ self getTypeId:index]];//一开始就加入平安银行的数据
 }
 
 //请求服务器数据
@@ -277,10 +274,11 @@
 
     
     if (state == PULL_MORE_LOADING) {
+        NSLog(@"state==PULL_MORE_LOADING");
          ++page;
         loadingMore = YES;
     }else if (state == PULL_UPDATING){
-        
+        NSLog(@"state==PULL_UPDATING");
     }
    
     NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=%i&page=1",API_URL,index,count*page];
@@ -320,9 +318,9 @@
     }
     if(flagRefresh){
         
-    //NSLog(@"上拉刷新");
-       state = PULL_MORE_LOADING;
-       [self reloadTableViewDataSourceWhenPullUp];
+       NSLog(@"上拉刷新");
+      // state = PULL_MORE_LOADING;
+      // [self reloadTableViewDataSourceWhenPullUp];
     }else{
        // NSLog(@"取消刷新");
     }
@@ -390,7 +388,7 @@
     }
     if(error != Nil){
         NSInteger code = [error code];
-        NSLog(@"%i %@",[error code],error);
+        NSLog(@"error %i %@",[error code],error);
         switch (code) {
             case NSURLErrorNotConnectedToInternet://网络断开
                 [SVProgressHUD showErrorWithStatus:@"无法连接到网络!"];
@@ -410,7 +408,7 @@
     
     
     if(parse_error != Nil){
-        NSLog(@"%i",[parse_error code]);
+        NSLog(@"parse error %i %@",[parse_error code],parse_error);
         return;
     }
     
@@ -438,7 +436,7 @@
         
         [self.list addObject:good];//加入到list
     }
-    
+    NSLog(@"data.count=%i",data.count);
     if(data.count==0){
         noNeedToLoad = YES;
         [self createTableFooter:INIT_FOOTER_NO_CONTENT_TEXT:NO];
@@ -458,7 +456,8 @@
     title = value.title;
     minIntegral = value.minIntegral;
     maxIntegral = value.maxIntegral;
-    [self showIsLoading];
+    [SVProgressHUD showWithStatus:@"正在获取数据" maskType:SVProgressHUDMaskTypeClear];  //弹出等待提示
+    [self requestData:[ self getTypeId:[menu selectedIndex] ]];//一开始就加入平安银行的数据
 }
 -(void) changeSelection{
     [queue cancelAllOperations];//取消所有操作
@@ -466,6 +465,7 @@
     queue = [[NSOperationQueue alloc] init];
     page = 1;
     title = @"";
+    [urlDict removeAllObjects];
     minIntegral = 0;
     maxIntegral = 0;
 }
@@ -520,15 +520,6 @@
 	
 }
 
-- (void) showIsLoading{
-    state = PULL_UPDATING;
-    [_refreshHeaderView setState:EGOOPullRefreshLoading];
-    [mUITableView setContentOffset:CGPointMake(0, -80) animated:YES];
-    UIScrollView* mScrollView = [[UIScrollView alloc] init];
-    [mScrollView setContentOffset:CGPointMake(0, -80.0f)];//仅仅为了模拟满足条件的情况
-     [_refreshHeaderView egoRefreshScrollViewDidEndDragging:mScrollView];
-    mScrollView = nil;
-}
 
 - (void) reloadTableViewDataSourceWhenPullUp{
     if (noNeedToLoad) {

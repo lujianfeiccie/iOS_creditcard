@@ -50,11 +50,9 @@ EGORefreshTableHeaderDelegate>
     UILabel *loadMoreText; //标签
     UIActivityIndicatorView* activityIndicatorView;//底部动画
     
-    NSInteger last_index_for_image;
+    NSMutableDictionary *urlDict;//地址字典
 }
 @property (strong, nonatomic) NSMutableArray *list;
 - (void)reloadTableViewDataSource;
 - (void)doneLoadingTableViewData;
-
-- (void) showIsLoading; //显示载入中，并请求
 @end
