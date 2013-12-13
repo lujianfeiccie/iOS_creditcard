@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, Test1) {
     if(mUserEntity!=nil){
         txtTitle.text = mUserEntity.title;
         txtIntegral.selectedIndex = mUserEntity.selectedIndex;//setter getter
-        NSLog(@"NSUserDefaults %i",mUserEntity.selectedIndex);
+        [self MyLog:[NSString stringWithFormat:@"NSUserDefaults %i",mUserEntity.selectedIndex]];
     }
     
     UIButton *backButton = [UIButton buttonWithType:101];//左箭头样式
@@ -160,13 +160,13 @@ typedef NS_ENUM(NSInteger, Test1) {
     }
 }
 -(void) viewDidDisappear:(BOOL)animated{
-    NSLog(@"SearchView======viewDidDisappear");
+   [self MyLog:@"SearchView======viewDidDisappear"];
     txtTitle = nil;
     _delegate = nil;
 }
 -(IBAction)IntegralSelect:(id)sender{
    // pickview_integral set
-    NSLog(@"textfieldTouchUpInside");
+   [self MyLog:@"textfieldTouchUpInside"];
 }
  
 
@@ -241,4 +241,9 @@ typedef NS_ENUM(NSInteger, Test1) {
     return YES;
 }
 
+-(void) MyLog: (NSString*) msg{
+#if defined(LOG_DEBUG)
+    NSLog(@"%@ %@",NSStringFromClass([self class]),msg);
+#endif
+}
 @end

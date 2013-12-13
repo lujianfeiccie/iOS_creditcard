@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1808786B184F5C26009501BC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1808786A184F5C26009501BC /* StoreKit.framework */; };
 		1814AE8417FEC416003C4E45 /* me_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1814AE8317FEC416003C4E45 /* me_icon.png */; };
 		1814AE8E17FEEADF003C4E45 /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1814AE8D17FEEADF003C4E45 /* ImageHelper.m */; };
 		183016E817F9D74C00ED6F9D /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 183016E717F9D74C00ED6F9D /* Constants.m */; };
@@ -67,6 +68,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1808786A184F5C26009501BC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		1808786C184F5C31009501BC /* 积分兑换.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "积分兑换.entitlements"; sourceTree = "<group>"; };
 		1814AE8317FEC416003C4E45 /* me_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_icon.png; sourceTree = "<group>"; };
 		1814AE8C17FEEADF003C4E45 /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
 		1814AE8D17FEEADF003C4E45 /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 			files = (
 				18359A1F18008E97005E5A2A /* QuartzCore.framework in Frameworks */,
 				18F69E3F17F870AD0063A5BB /* CoreGraphics.framework in Frameworks */,
+				1808786B184F5C26009501BC /* StoreKit.framework in Frameworks */,
 				18F69E4117F870AD0063A5BB /* UIKit.framework in Frameworks */,
 				18F69E3D17F870AD0063A5BB /* Foundation.framework in Frameworks */,
 			);
@@ -287,6 +291,7 @@
 		18F69E3B17F870AD0063A5BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1808786A184F5C26009501BC /* StoreKit.framework */,
 				18359A1E18008E97005E5A2A /* QuartzCore.framework */,
 				18F69E3C17F870AD0063A5BB /* Foundation.framework */,
 				18F69E3E17F870AD0063A5BB /* CoreGraphics.framework */,
@@ -299,6 +304,7 @@
 		18F69E4217F870AD0063A5BB /* creditcard */ = {
 			isa = PBXGroup;
 			children = (
+				1808786C184F5C31009501BC /* 积分兑换.entitlements */,
 				18B423281825F36C000EBDDB /* PullDownRefresh */,
 				18EC01DA18102BE4005EE598 /* UI */,
 				18359A1818008D78005E5A2A /* SVProgressHUD */,
@@ -431,6 +437,14 @@
 				TargetAttributes = {
 					18F69E3817F870AD0063A5BB = {
 						DevelopmentTeam = 9385232JZS;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					18F69E5917F870AD0063A5BB = {
 						TestTargetID = 18F69E3817F870AD0063A5BB;
@@ -622,7 +636,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -643,13 +657,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "creditcard/积分兑换.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "creditcard/creditcard-Prefix.pch";
 				INFOPLIST_FILE = "creditcard/creditcard-Info.plist";
 				PRODUCT_NAME = "积分兑换";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E8FD304C-C0C1-45A7-91D4-48621E69C05D";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -660,13 +675,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "creditcard/积分兑换.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "creditcard/creditcard-Prefix.pch";
 				INFOPLIST_FILE = "creditcard/creditcard-Info.plist";
 				PRODUCT_NAME = "积分兑换";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "E8FD304C-C0C1-45A7-91D4-48621E69C05D";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"viewDidLoad");
+    [self MyLog:@"viewDidLoad"];
     [self initData];
 }
 //关于对话框
@@ -117,7 +117,7 @@
 -(void) downloadImage:(CellAndImage*) mCellAndImage{
     
     if ([urlDict objectForKey:mCellAndImage.image_url]==nil) {
-        NSLog(@"url=%@",mCellAndImage.image_url);
+        [self MyLog:[NSString stringWithFormat:@"url=%@",mCellAndImage.image_url] ];
         [urlDict setObject:mCellAndImage.image_url forKey:mCellAndImage.image_url];
         
         NSURL *imageUrl = [NSURL URLWithString:mCellAndImage.image_url];
@@ -146,12 +146,12 @@
     
     static NSString *CustomCellIdentifier = @"CustomCellIdentifier";
     
-    static BOOL nibsRegistered = NO;
-    if (!nibsRegistered) {
+    //static BOOL nibsRegistered = NO;
+   // if (!nibsRegistered) {
         UINib *nib = [UINib nibWithNibName:@"CustomCell" bundle:nil];
         [tableView registerNib:nib forCellReuseIdentifier:CustomCellIdentifier];
-        nibsRegistered = YES;
-    }
+      //  nibsRegistered = YES;
+    //}
     CustomCell *cell = [tableView dequeueReusableCellWithIdentifier:
                         CustomCellIdentifier];
     
@@ -198,7 +198,6 @@
 
 //选中某个Cell
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-   // NSLog(@"didSelectRowAtIndexPath %ld",(long)[indexPath row]);
     Good *good = [self.list objectAtIndex:[indexPath row]];
     selectedIndex = [indexPath row];
     NSString* message = [NSString stringWithFormat:@"复制编号:%@ ?",good.no];
@@ -208,7 +207,7 @@
 
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"clickedButtonAtIndex %i",buttonIndex);
+    [self MyLog:[NSString stringWithFormat:@"clickedButtonAtIndex %i",buttonIndex]];
     switch (buttonIndex) {
         case 0://取消
             break;
@@ -225,7 +224,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    NSLog(@"didReceiveMemoryWarning");
+    [self MyLog:@"didReceiveMemoryWarning"];
     // Dispose of any resources that can be recreated.
 }
 -(NSInteger) getTypeId:(NSInteger)bank{
@@ -261,7 +260,7 @@
 
 //请求服务器数据
 -(void)requestData:(NSUInteger)index{
-    NSLog(@"requestData %i %i %i",index,loadingMore,_reloading);
+    [self MyLog:[NSString stringWithFormat:@"requestData %i %i %i",index,loadingMore,_reloading]];
     if (loadingMore) {
         
         return;
@@ -274,11 +273,11 @@
 
     
     if (state == PULL_MORE_LOADING) {
-        NSLog(@"state==PULL_MORE_LOADING");
+        [self MyLog:@"state==PULL_MORE_LOADING"];
          ++page;
         loadingMore = YES;
     }else if (state == PULL_UPDATING){
-        NSLog(@"state==PULL_UPDATING");
+        [self MyLog:@"state==PULL_UPDATING"];
     }
    
     NSString* request_url = [NSString stringWithFormat:@"%@?good_typeid=%i&count=%i&page=1",API_URL,index,count*page];
@@ -291,7 +290,7 @@
         request_url = [NSString stringWithFormat:@"%@&good_name=%@",request_url,[title stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
     
-    NSLog(@"%@",request_url);
+    [self MyLog:[NSString stringWithFormat:@"%@",request_url]];
     mHttpRequestTool.url = request_url;
     
     //NSThread* myThread = [[NSThread alloc] initWithTarget:self selector:@selector(threafunc) object:nil];
@@ -318,7 +317,7 @@
     }
     if(flagRefresh){
         
-       NSLog(@"上拉刷新");
+       [self MyLog:@"上拉刷新"];
       // state = PULL_MORE_LOADING;
       // [self reloadTableViewDataSourceWhenPullUp];
     }else{
@@ -329,7 +328,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-    NSLog(@"scrollViewDidEndDragging");
+    [self MyLog:@"scrollViewDidEndDragging"];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -341,6 +340,11 @@
 {
     if (tableFooterView==Nil ) {
         tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, mUITableView.bounds.size.width, 60.0f)];
+        
+        //加入载入更多提示
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loadMore)];
+        [mUITableView addGestureRecognizer:singleTap];
+        
         if(loadMoreText==nil){
             loadMoreText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 60.0f)];
             [loadMoreText setCenter:tableFooterView.center];
@@ -370,11 +374,15 @@
         }
     }
 }
-
+-(void) loadMore{
+    [self createTableFooter:INIT_FOOTER_GETING_CONTENT_TEXT:YES];
+    state = PULL_MORE_LOADING;
+    [self requestData:[ self getTypeId:[menu selectedIndex] ]];
+}
 //回调方法,接收http返回json数据
 -(void)onMsgReceive :(NSData*) msg :(NSError*) error
 {
-    NSLog(@"onMsgReceive");
+    
     [SVProgressHUD dismiss];//消除等待提示
     [self doneLoadingTableViewData];
     [mUITableView.tableFooterView setHidden:NO];//让Footer显示出来
@@ -388,7 +396,7 @@
     }
     if(error != Nil){
         NSInteger code = [error code];
-        NSLog(@"error %i %@",[error code],error);
+        [self MyLog:[NSString stringWithFormat:@"error %i %@",[error code],error]];
         switch (code) {
             case NSURLErrorNotConnectedToInternet://网络断开
                 [SVProgressHUD showErrorWithStatus:@"无法连接到网络!"];
@@ -408,7 +416,7 @@
     
     
     if(parse_error != Nil){
-        NSLog(@"parse error %i %@",[parse_error code],parse_error);
+        [self MyLog:[NSString stringWithFormat:@"parse error %i %@",[parse_error code],parse_error]];
         return;
     }
     
@@ -436,7 +444,7 @@
         
         [self.list addObject:good];//加入到list
     }
-    NSLog(@"data.count=%i",data.count);
+    [self MyLog:[NSString stringWithFormat:@"data.count=%i",data.count]];
     if(data.count==0){
         noNeedToLoad = YES;
         [self createTableFooter:INIT_FOOTER_NO_CONTENT_TEXT:NO];
@@ -449,7 +457,7 @@
     
 }
 -(void)passValue:(UserEntity *)value{ //从筛选界面过来
-    NSLog(@"%@ min %i max %i",value.title,value.minIntegral,value.maxIntegral);
+    [self MyLog:[NSString stringWithFormat:@"%@ min %i max %i",value.title,value.minIntegral,value.maxIntegral]];
     noNeedToLoad = NO;
     _reloading = NO;
 
@@ -479,7 +487,7 @@
 	//  put here just for demo
      [self requestData:[self getTypeId:menu.selectedIndex]];
     _reloading = YES;
-    NSLog(@"reloadTableViewDataSource");
+    [self MyLog:@"reloadTableViewDataSource"];
 	
 }
 
@@ -488,7 +496,7 @@
 	//  model should call this when its done loading
 	_reloading = NO;
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:mUITableView];
-    NSLog(@"doneLoadingTableViewData");
+    [self MyLog:@"doneLoadingTableViewData"];
 }
 
 #pragma mark -
@@ -498,7 +506,7 @@
 	
 	[self reloadTableViewDataSource];
 	//[self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];//搞定就调用doneLoadingTableViewData
-    NSLog(@"egoRefreshTableHeaderDidTriggerRefresh");
+    [self MyLog:@"egoRefreshTableHeaderDidTriggerRefresh"];
 }
 
 - (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
@@ -508,7 +516,7 @@
 }
 
 - (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-    NSLog(@"egoRefreshTableHeaderDataSourceLastUpdated");
+    [self MyLog:@"egoRefreshTableHeaderDataSourceLastUpdated"];
 	return [NSDate date]; // should return date data source was last changed
 	
 }
@@ -531,7 +539,12 @@
 }
 
 - (void) viewDidDisappear:(BOOL)animated{
-    NSLog(@"viewDidDisappear");
+    [self MyLog:@"viewDidDisappear"];
 }
 
+-(void) MyLog: (NSString*) msg{
+#if defined(LOG_DEBUG)
+    NSLog(@"%@ %@",NSStringFromClass([self class]),msg);
+#endif
+}
 @end
