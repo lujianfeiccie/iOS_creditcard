@@ -50,4 +50,9 @@
     
     return newimg;
 }
++ (void) setToolBarBtn:(UIBarButtonItem*) btn{
+    [btn setBackgroundImage:[UIImage imageNamed:@"toolbar_btn.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    [btn setBackgroundImage:[UIImage imageNamed:@"toolbar_btn_s.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+}
 @end

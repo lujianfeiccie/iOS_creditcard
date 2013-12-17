@@ -96,15 +96,17 @@ typedef NS_ENUM(NSInteger, Test1) {
         [self MyLog:[NSString stringWithFormat:@"NSUserDefaults %i",mUserEntity.selectedIndex]];
     }
     
-    UIButton *backButton = [UIButton buttonWithType:101];//左箭头样式
-    [backButton addTarget:self action:@selector(backbtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setTitle:@"返回" forState:UIControlStateNormal];
+    
     //加入返回按钮
-    UIBarButtonItem *barbackButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationItem.leftBarButtonItem = barbackButton;
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:self action:@selector(backbtnClick)];
+    
+    [ImageHelper setToolBarBtn:backButton];    //加入返回按钮
+    self.navigationItem.leftBarButtonItem = backButton;
     
     //加入筛选按钮
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithTitle:@"查询"style:UIBarButtonItemStyleBordered target:self action:@selector(searchbtnClick)];
+   [ImageHelper setToolBarBtn:searchButton];
+    
     self.navigationItem.rightBarButtonItem = searchButton;
     
     

@@ -31,9 +31,12 @@
 }
 //关于对话框
 - (void) aboutDlg {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"关于" message:@"作者：陆键霏" delegate:nil cancelButtonTitle:@"了解" otherButtonTitles:nil, nil];
+   /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"关于" message:@"作者：陆键霏" delegate:nil cancelButtonTitle:@"了解" otherButtonTitles:nil, nil];
     [alert show];
-    alert = nil;
+    alert = nil;*/
+    
+    UIViewController* view = [[self storyboard] instantiateViewControllerWithIdentifier:@"aboutdlgview"];
+    [[self navigationController] pushViewController:view animated:YES];
 }
 
 //筛选对话框
@@ -66,14 +69,23 @@
         [menu displayMenuInView:self.view];
         menu.items = bank_array;
         menu.delegate = self;
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"title_bar.png"] forBarMetrics:UIBarMetricsDefault];
         self.navigationItem.titleView = menu;
         
         //加入关于按钮
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"关于"style:UIBarButtonItemStyleBordered target:self action:@selector(aboutDlg)];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"关于" style:UIBarButtonItemStyleBordered target:self action:@selector(aboutDlg)];
+        
+        [ImageHelper setToolBarBtn:backButton];
+      
+        
         self.navigationItem.leftBarButtonItem = backButton;
         
         //加入筛选按钮
         UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"筛选"style:UIBarButtonItemStyleBordered target:self action:@selector(filterDlg)];
+        
+          [ImageHelper setToolBarBtn:filterButton];
+        
+        
         self.navigationItem.rightBarButtonItem = filterButton;
     }
     
