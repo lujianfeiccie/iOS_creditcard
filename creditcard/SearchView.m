@@ -63,6 +63,18 @@ typedef NS_ENUM(NSInteger, Test1) {
     return self;
 }
 
+-(void) viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
+    [self.otherIntegralView setFrame:CGRECT_HAVE_NAV(
+    self.otherIntegralView.frame.origin.x,
+     self.otherIntegralView.frame.origin.y,
+     self.otherIntegralView.frame.size.width,
+    self.otherIntegralView.frame.size.height)];
+    
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

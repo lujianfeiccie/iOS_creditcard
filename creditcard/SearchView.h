@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UICombox.h"
 #import "ImageHelper.h"
+#import "AppDelegate.h"
 
 @interface UserEntity : NSObject<NSCoding> //用户传值实体类
 {

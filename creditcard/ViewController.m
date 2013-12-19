@@ -27,8 +27,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [self MyLog:@"viewDidLoad"];
+   
     [self initData];
+     [mUITableView setFrame:CGRECT_HAVE_NAV(mUITableView.frame.origin.x,
+                                            mUITableView.frame.origin.y,
+                                            mUITableView.frame.size.width,
+                                            self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height)];
 }
+
 //关于对话框
 - (void) aboutDlg {
    /* UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"关于" message:@"作者：陆键霏" delegate:nil cancelButtonTitle:@"了解" otherButtonTitles:nil, nil];

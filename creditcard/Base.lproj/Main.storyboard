@@ -119,24 +119,35 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="me_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="cdf-Tr-MzZ">
-                                <rect key="frame" x="107" y="20" width="95" height="91"/>
+                                <rect key="frame" x="107" y="36" width="95" height="91"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="作者：陆键霏" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISd-B1-iYD">
-                                <rect key="frame" x="100" y="119" width="102" height="40"/>
+                                <rect key="frame" x="103" y="172" width="102" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lujianfeiccie@gmail.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRr-Yx-8N2">
-                                <rect key="frame" x="69" y="167" width="183" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="lujianfeiccie@gmail.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yRr-Yx-8N2">
+                                <rect key="frame" x="69" y="231" width="183" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="183" id="HtJ-SP-5Pd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="yRr-Yx-8N2" secondAttribute="trailing" constant="68" id="hZM-R5-POp"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="img_head" destination="cdf-Tr-MzZ" id="s1f-tb-NLK"/>
+                        <outlet property="label_line1" destination="ISd-B1-iYD" id="2hk-cl-y11"/>
+                        <outlet property="label_line2" destination="yRr-Yx-8N2" id="Zg4-XR-Dqg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hg-Dj-Etq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

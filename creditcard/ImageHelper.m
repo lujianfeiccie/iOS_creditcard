@@ -54,5 +54,8 @@
     [btn setBackgroundImage:[UIImage imageNamed:@"toolbar_btn.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     
     [btn setBackgroundImage:[UIImage imageNamed:@"toolbar_btn_s.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    
+    
+    [btn setTintColor:[UIColor whiteColor]];
 }
 @end

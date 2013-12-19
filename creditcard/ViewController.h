@@ -12,6 +12,7 @@
 #import "HttpRequestTool.h"
 #import "SearchView.h"
 #import "EGORefreshTableHeaderView.h"
+#import "AppDelegate.h"
 typedef enum{
 	PULL_UPDATING = 0,
 	PULL_MORE_LOADING
