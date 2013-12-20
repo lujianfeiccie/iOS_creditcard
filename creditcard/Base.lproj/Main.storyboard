@@ -119,7 +119,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="me_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="cdf-Tr-MzZ">
-                                <rect key="frame" x="107" y="36" width="95" height="91"/>
+                                <rect key="frame" x="107" y="61" width="95" height="91"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="作者：陆键霏" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ISd-B1-iYD">
@@ -137,6 +137,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="V 1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzP-cZ-fB4">
+                                <rect key="frame" x="129" y="291" width="63" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="63" id="Okb-4M-EXh"/>
+                                    <constraint firstAttribute="width" constant="183" id="rjw-ms-GAE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -147,6 +157,7 @@
                         <outlet property="img_head" destination="cdf-Tr-MzZ" id="s1f-tb-NLK"/>
                         <outlet property="label_line1" destination="ISd-B1-iYD" id="2hk-cl-y11"/>
                         <outlet property="label_line2" destination="yRr-Yx-8N2" id="Zg4-XR-Dqg"/>
+                        <outlet property="label_line3" destination="rzP-cZ-fB4" id="g7Z-69-shq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hg-Dj-Etq" userLabel="First Responder" sceneMemberID="firstResponder"/>

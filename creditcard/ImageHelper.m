@@ -73,4 +73,16 @@
     imageView.layer.masksToBounds = YES;
     imageView.layer.cornerRadius = imageView.frame.size.width/2;
 }
++ (void) setToCircleWithRing:(UIImageView*) imageView : (UIView*) view : (NSUInteger) width;{
+    UIImageView *imageView_bg = [[UIImageView alloc] init];
+    [imageView_bg setBackgroundColor:[UIColor whiteColor]];
+    [imageView_bg setFrame:CGRectMake(imageView.frame.origin.x-width,
+                                      imageView.frame.origin.y-width,
+                                      imageView.frame.size.width + width*2,
+                                      imageView.frame.size.height + width*2)];
+    [ImageHelper setToCircle:imageView];
+    [ImageHelper setToCircle:imageView_bg];
+    [view addSubview:imageView_bg];
+    [view bringSubviewToFront:imageView];
+}
 @end

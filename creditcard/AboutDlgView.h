@@ -19,6 +19,6 @@ NSTimer *updateTimer;  //timer对象
 }
 @property (weak, nonatomic) IBOutlet UIImageView *img_head;
 @property (weak, nonatomic) IBOutlet UILabel *label_line1;
-
 @property (weak, nonatomic) IBOutlet UILabel *label_line2;
+@property (weak, nonatomic) IBOutlet UILabel *label_line3;
 @end

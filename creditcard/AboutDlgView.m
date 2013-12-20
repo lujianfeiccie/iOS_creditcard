@@ -35,8 +35,7 @@
     [ImageHelper setToolBarBtn:backButton];    //加入返回按钮
     self.navigationItem.leftBarButtonItem = backButton;
     
-   
-    [ImageHelper setToCircle:self.img_head];
+    [ImageHelper setToCircleWithRing:self.img_head :self.view :2];
     
     self.view.backgroundColor = [UIColor blackColor];
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateLabelColor) userInfo:nil repeats:YES];
@@ -82,7 +81,8 @@
         [updateTimer invalidate];
         self.label_line1.textColor = [UIColor colorWithRed:red green:green blue:blue  alpha:1];
         self.label_line2.textColor = [UIColor colorWithRed:red green:green blue:blue  alpha:1];
-         }
+        self.label_line3.textColor =[UIColor colorWithRed:red green:green blue:blue  alpha:1];
+    }
 }
 - (void)backbtnClick {
     if(updateTimer!=nil){

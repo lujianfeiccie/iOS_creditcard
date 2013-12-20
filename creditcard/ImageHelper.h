@@ -14,4 +14,5 @@
 + (void) setToolBarBtn:(UIBarButtonItem*) btn;
 + (void) setRect:(UIView*) view;
 + (void) setToCircle:(UIImageView*) imageView;
++ (void) setToCircleWithRing:(UIImageView*) imageView : (UIView*) view : (NSUInteger) width;
 @end
