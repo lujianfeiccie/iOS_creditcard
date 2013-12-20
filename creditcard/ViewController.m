@@ -29,10 +29,14 @@
     [self MyLog:@"viewDidLoad"];
    
     [self initData];
-     [mUITableView setFrame:CGRECT_HAVE_NAV(mUITableView.frame.origin.x,
+    for (id obj in self.view.subviews)  {
+        [ImageHelper setRect:obj];
+    }
+    /*[mUITableView setFrame:CGRECT_HAVE_NAV(mUITableView.frame.origin.x,
                                             mUITableView.frame.origin.y,
                                             mUITableView.frame.size.width,
                                             self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height)];
+     */
 }
 
 //关于对话框

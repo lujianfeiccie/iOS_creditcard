@@ -66,13 +66,9 @@ typedef NS_ENUM(NSInteger, Test1) {
 -(void) viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
-    [self.otherIntegralView setFrame:CGRECT_HAVE_NAV(
-    self.otherIntegralView.frame.origin.x,
-     self.otherIntegralView.frame.origin.y,
-     self.otherIntegralView.frame.size.width,
-    self.otherIntegralView.frame.size.height)];
-    
-    
+    for (id obj in self.view.subviews)  {
+        [ImageHelper setRect:obj];
+    }
 }
 
 - (void)viewDidLoad

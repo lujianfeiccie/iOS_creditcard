@@ -35,10 +35,8 @@
     [ImageHelper setToolBarBtn:backButton];    //加入返回按钮
     self.navigationItem.leftBarButtonItem = backButton;
     
-     CALayer *lay  = self.img_head.layer;//获取ImageView的层
-    [lay setMasksToBounds:YES];
-    [lay setCornerRadius:20.0];//值越大，角度越圆
-    
+   
+    [ImageHelper setToCircle:self.img_head];
     
     self.view.backgroundColor = [UIColor blackColor];
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateLabelColor) userInfo:nil repeats:YES];
@@ -56,20 +54,9 @@
 }
 -(void) viewDidLayoutSubviews{
     [self MyLog:@"viewDidLayoutSubviews"];
-    [self.img_head setFrame:CGRECT_HAVE_NAV(self.img_head.frame.origin.x,
-                                            self.img_head.frame.origin.y,
-                                            self.img_head.frame.size.width,
-                                            self.img_head.frame.size.height)];
-    
-    [self.label_line1 setFrame:CGRECT_HAVE_NAV(self.label_line1.frame.origin.x,
-                                               self.label_line1.frame.origin.y,
-                                               self.label_line1.frame.size.width,
-                                               self.label_line1.frame.size.height)];
-    
-    [self.label_line2 setFrame:CGRECT_HAVE_NAV(self.label_line2.frame.origin.x,
-                                               self.label_line2.frame.origin.y,
-                                               self.label_line2.frame.size.width,
-                                               self.label_line2.frame.size.height)];
+    for (id obj in self.view.subviews)  {
+        [ImageHelper setRect:obj];
+    }
 }
 -(void) viewDidAppear:(BOOL)animated{
     [self MyLog:@"viewDidAppear"];

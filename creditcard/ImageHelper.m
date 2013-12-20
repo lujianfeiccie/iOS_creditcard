@@ -58,4 +58,19 @@
     
     [btn setTintColor:[UIColor whiteColor]];
 }
+
++ (void) setRect:(UIView*) view{
+    [view setFrame:CGRECT_HAVE_NAV(view.frame.origin.x,
+                                               view.frame.origin.y,
+                                               view.frame.size.width,
+                                               view.frame.size.height)];
+}
++ (void) setToCircle:(UIImageView*) imageView{
+    [imageView setFrame:CGRectMake(imageView.frame.origin.x,
+                                       imageView.frame.origin.y,
+                                       imageView.frame.size.width,
+                                       imageView.frame.size.height)];
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.cornerRadius = imageView.frame.size.width/2;
+}
 @end
