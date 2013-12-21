@@ -450,7 +450,7 @@
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
 					18F69E3817F870AD0063A5BB = {
-						DevelopmentTeam = 9385232JZS;
+						DevelopmentTeam = 3U5V8P94QW;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;

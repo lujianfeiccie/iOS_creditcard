@@ -100,9 +100,10 @@
     }
     
     //加入列表
-    mUITableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 420)];
+    mUITableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height)];
     [mUITableView setDelegate:self];
     [mUITableView setDataSource:self];
+    
     [self.view addSubview:mUITableView];
     
     //加入下拉刷新的header view
