@@ -59,6 +59,14 @@
 		18F69E8D17F878A70063A5BB /* SIMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F69E8017F878A70063A5BB /* SIMenuTable.m */; };
 		18F69E8E17F878A70063A5BB /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F69E8217F878A70063A5BB /* SINavigationMenuView.m */; };
 		18F69E8F17F878A70063A5BB /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F69E8417F878A70063A5BB /* UIColor+Extension.m */; };
+		18FD1EBC186FC86B00DFA819 /* creditcard29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EB9186FC86B00DFA819 /* creditcard29x29.png */; };
+		18FD1EBD186FC86B00DFA819 /* creditcard57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EBA186FC86B00DFA819 /* creditcard57x57.png */; };
+		18FD1EBE186FC86B00DFA819 /* creditcard60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EBB186FC86B00DFA819 /* creditcard60x60.png */; };
+		18FD1EC0186FC9E000DFA819 /* creditcard80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EBF186FC9E000DFA819 /* creditcard80x80.png */; };
+		18FD1EC4186FCC2D00DFA819 /* creditcard40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EC1186FCC2D00DFA819 /* creditcard40x40.png */; };
+		18FD1EC5186FCC2D00DFA819 /* creditcard58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EC2186FCC2D00DFA819 /* creditcard58x58.png */; };
+		18FD1EC6186FCC2D00DFA819 /* creditcard120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EC3186FCC2D00DFA819 /* creditcard120x120.png */; };
+		18FD1EC8186FCC7A00DFA819 /* creditcard114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FD1EC7186FCC7A00DFA819 /* creditcard114x114.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +156,14 @@
 		18F69E8217F878A70063A5BB /* SINavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINavigationMenuView.m; sourceTree = "<group>"; };
 		18F69E8317F878A70063A5BB /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		18F69E8417F878A70063A5BB /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		18FD1EB9186FC86B00DFA819 /* creditcard29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard29x29.png; path = images/creditcard29x29.png; sourceTree = "<group>"; };
+		18FD1EBA186FC86B00DFA819 /* creditcard57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard57x57.png; path = images/creditcard57x57.png; sourceTree = "<group>"; };
+		18FD1EBB186FC86B00DFA819 /* creditcard60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard60x60.png; path = images/creditcard60x60.png; sourceTree = "<group>"; };
+		18FD1EBF186FC9E000DFA819 /* creditcard80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard80x80.png; path = images/creditcard80x80.png; sourceTree = "<group>"; };
+		18FD1EC1186FCC2D00DFA819 /* creditcard40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard40x40.png; path = images/creditcard40x40.png; sourceTree = "<group>"; };
+		18FD1EC2186FCC2D00DFA819 /* creditcard58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard58x58.png; path = images/creditcard58x58.png; sourceTree = "<group>"; };
+		18FD1EC3186FCC2D00DFA819 /* creditcard120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard120x120.png; path = images/creditcard120x120.png; sourceTree = "<group>"; };
+		18FD1EC7186FCC7A00DFA819 /* creditcard114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = creditcard114x114.png; path = images/creditcard114x114.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +195,14 @@
 		1814AE8217FEC3DB003C4E45 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				18FD1EC7186FCC7A00DFA819 /* creditcard114x114.png */,
+				18FD1EC1186FCC2D00DFA819 /* creditcard40x40.png */,
+				18FD1EC2186FCC2D00DFA819 /* creditcard58x58.png */,
+				18FD1EC3186FCC2D00DFA819 /* creditcard120x120.png */,
+				18FD1EBF186FC9E000DFA819 /* creditcard80x80.png */,
+				18FD1EB9186FC86B00DFA819 /* creditcard29x29.png */,
+				18FD1EBA186FC86B00DFA819 /* creditcard57x57.png */,
+				18FD1EBB186FC86B00DFA819 /* creditcard60x60.png */,
 				18EFF03C18648CF9008CA52B /* me_icon.png */,
 				1807ABD41860966B0022E8BC /* toolbar_btn_s.png */,
 				1807ABD218608E8A0022E8BC /* toolbar_btn.png */,
@@ -490,26 +514,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				18F69E8717F878A70063A5BB /* arrow_down1@2x.png in Resources */,
+				18FD1EBC186FC86B00DFA819 /* creditcard29x29.png in Resources */,
 				18B423371825F36C000EBDDB /* blackArrow.png in Resources */,
+				18FD1EC4186FCC2D00DFA819 /* creditcard40x40.png in Resources */,
 				18B423381825F36C000EBDDB /* blackArrow@2x.png in Resources */,
 				1807ABD51860966B0022E8BC /* toolbar_btn_s.png in Resources */,
+				18FD1EC8186FCC7A00DFA819 /* creditcard114x114.png in Resources */,
 				18F69E8817F878A70063A5BB /* arrow_down@2x.png in Resources */,
 				1807ABD318608E8A0022E8BC /* toolbar_btn.png in Resources */,
 				18AE41B217FE717A00B7770D /* CustomCell.xib in Resources */,
 				18F69E8617F878A70063A5BB /* arrow_down1.png in Resources */,
+				18FD1EC0186FC9E000DFA819 /* creditcard80x80.png in Resources */,
 				18359A1C18008D78005E5A2A /* SVProgressHUD.bundle in Resources */,
 				18F69E5517F870AD0063A5BB /* Images.xcassets in Resources */,
 				18F69E4717F870AD0063A5BB /* InfoPlist.strings in Resources */,
 				18B4233A1825F36C000EBDDB /* blueArrow@2x.png in Resources */,
 				1807ABD11860880C0022E8BC /* title_bar.png in Resources */,
 				18B4233C1825F36C000EBDDB /* grayArrow@2x.png in Resources */,
+				18FD1EC5186FCC2D00DFA819 /* creditcard58x58.png in Resources */,
 				18B423391825F36C000EBDDB /* blueArrow.png in Resources */,
+				18FD1EC6186FCC2D00DFA819 /* creditcard120x120.png in Resources */,
 				18B4233D1825F36C000EBDDB /* whiteArrow.png in Resources */,
 				18B4233B1825F36C000EBDDB /* grayArrow.png in Resources */,
+				18FD1EBD186FC86B00DFA819 /* creditcard57x57.png in Resources */,
 				18F69E5017F870AD0063A5BB /* Main.storyboard in Resources */,
 				18EFF03D18648CF9008CA52B /* me_icon.png in Resources */,
 				18B4233E1825F36C000EBDDB /* whiteArrow@2x.png in Resources */,
 				18F69E8517F878A70063A5BB /* arrow_down.png in Resources */,
+				18FD1EBE186FC86B00DFA819 /* creditcard60x60.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
