@@ -9,13 +9,13 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "creditcard29x29.png",
+      "filename" : "creditcard58x58.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "creditcard40x40.png",
+      "filename" : "creditcard80x80.png",
       "scale" : "2x"
     },
     {
@@ -33,7 +33,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "creditcard60x60.png",
+      "filename" : "creditcard120x120.png",
       "scale" : "2x"
     }
   ],

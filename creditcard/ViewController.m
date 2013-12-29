@@ -25,7 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	// Do any additional setup after loadin/Users/apple/Desktop/ios_workspace/creditcard/creditcard/creditcard/ViewController.mg the view, typically from a nib.
     [self MyLog:@"viewDidLoad"];
    
     [self initData];
@@ -447,6 +447,7 @@
         [temp_good setImage:nil];
     }
      [self.list removeAllObjects];
+    [mUITableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];//主线程更新列表数据
     
     NSDictionary* data =[dataDic objectForKey:@"data"];//解析得到数据集
     

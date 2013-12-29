@@ -35,6 +35,8 @@
     [ImageHelper setToolBarBtn:backButton];    //加入返回按钮
     self.navigationItem.leftBarButtonItem = backButton;
     
+    [self.img_head setImage:[UIImage imageNamed:@"me_icon.png"]];
+    
     [ImageHelper setToCircleWithRing:self.img_head :self.view :2];
     
     self.view.backgroundColor = [UIColor blackColor];
