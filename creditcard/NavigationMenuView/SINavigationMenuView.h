@@ -11,13 +11,14 @@
 
 @protocol SINavigationMenuDelegate <NSObject>
 
-- (void)didSelectItemAtIndex:(NSUInteger)index;
+- (void)didSelectItemAtIndex:(NSUInteger)index SelectedIndexOld : (NSUInteger)selectedIndexOld ;
 
 @end
 
 @interface SINavigationMenuView : UIView <SIMenuDelegate>
 {
     NSInteger selectedIndex;
+    NSInteger selectedIndexOld;
 }
 @property (nonatomic, weak) id <SINavigationMenuDelegate> delegate;
 @property (nonatomic, strong) NSArray *items;

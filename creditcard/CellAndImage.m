@@ -9,7 +9,12 @@
 #import "CellAndImage.h"
 
 @implementation CellAndImage
-@synthesize cell;
+@synthesize imageView;
 @synthesize image_url;
-@synthesize index;
+-(UIImageView*) getImageView{
+    return imageView;
+}
+-(NSString*) getImageUrl{
+    return image_url;
+}
 @end

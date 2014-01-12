@@ -65,7 +65,7 @@
   
 }
 -(void) updateLabelColor{
-    [self MyLog:@"updateLabelColor"];
+  //  [self MyLog:@"updateLabelColor"];
     self.label_line1.textColor = [UIColor colorWithRed:red green:green blue:blue  alpha:alpha];
     self.label_line2.textColor = [UIColor colorWithRed:red green:green blue:blue  alpha:1-alpha];
     if(alpha>1){

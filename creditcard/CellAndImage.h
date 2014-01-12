@@ -11,11 +11,11 @@
 #import "Good.h"
 @interface CellAndImage : NSObject
 {
-    CustomCell* cell;
-    NSUInteger index;
+    UIImageView* imageView;
     NSString* image_url;
 }
-@property(nonatomic,retain) CustomCell* cell;
+@property(nonatomic,retain) UIImageView* imageView;
 @property(nonatomic,retain) NSString* image_url;
-@property(nonatomic) NSUInteger index;
+-(UIImageView*) getImageView;
+-(NSString*) getImageUrl;
 @end
