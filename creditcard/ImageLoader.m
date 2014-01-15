@@ -18,15 +18,17 @@
     [queue setMaxConcurrentOperationCount:5];
     return self;
 }
--(void)displayImage: (UIImageView*) imageView ImageUrl :(NSString*) imageUrl{
+-(void)displayImage: (UIImageView*) imageView ImageUrl :(NSString*) imageUrl TableView :(UITableView*) tableView{
    UIImage* image = [ImageCache objectForKey:imageUrl];
     if(image!=Nil){
         imageView.image = image;
     }else{
-        [self getImage:imageView ImageUrl:imageUrl];
+        [self getImage:imageView ImageUrl:imageUrl TableView:tableView];
     }
 }
--(void) getImage:(UIImageView*) imageView ImageUrl :(NSString*) imageUrl{
+-(void) getImage:(UIImageView*) imageView ImageUrl :(NSString*) imageUrl TableView :(UITableView*) tableView{
+    
+    //NSLog(@"width=%f height%f",ImageSize.width,ImageSize.height);
     
     imageView.image = [ImageHelper image:[UIImage imageNamed:@"loading.png"] fitInSize:ImageSize];
     
@@ -34,6 +36,7 @@
     
     [mCellAndImage setImageView:imageView];
     [mCellAndImage setImage_url:imageUrl];
+    [mCellAndImage setTableView:tableView];
     
     NSOperation *op = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(getImageByUrl:) object:mCellAndImage];
     
@@ -48,12 +51,12 @@
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:Url]];
     
     UIImage* after_image = [ImageHelper image:image fitInSize:ImageSize];
-    
+   // NSLog(@"after width=%f height=%f",after_image.size.width,after_image.size.height);
     [ImageCache setObject:after_image forKey:[mCellAndImage getImageUrl]];//加入到缓存中
 
     [mCellAndImage.getImageView performSelectorOnMainThread:@selector(image) withObject:after_image waitUntilDone:YES];//在主线程中加载图片
     
-    
+    [mCellAndImage.getTableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     image = nil;
 }
 -(void)ClearCache{

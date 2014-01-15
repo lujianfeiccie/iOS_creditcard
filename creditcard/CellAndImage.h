@@ -13,9 +13,12 @@
 {
     UIImageView* imageView;
     NSString* image_url;
+    UITableView* tableView;
 }
 @property(nonatomic,retain) UIImageView* imageView;
 @property(nonatomic,retain) NSString* image_url;
+@property(nonatomic,retain) UITableView* tableView;
 -(UIImageView*) getImageView;
 -(NSString*) getImageUrl;
+-(UITableView*) getTableView;
 @end

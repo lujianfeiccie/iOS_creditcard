@@ -16,6 +16,6 @@
     //线程池
     NSOperationQueue* queue;
 }
--(void)displayImage: (UIImageView*) imageView ImageUrl :(NSString*) imageUrl;
+-(void)displayImage: (UIImageView*) imageView ImageUrl :(NSString*) imageUrl TableView :(UITableView*) tableView;
 -(void)ClearCache;
 @end

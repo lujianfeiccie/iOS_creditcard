@@ -142,11 +142,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "creditcard/CellAndImage.h"
-            timestampString = "411226922.389029"
+            timestampString = "411490635.527637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "@interface CellAndImage"
             landmarkType = "2">
             <Locations>

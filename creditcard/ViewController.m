@@ -205,7 +205,7 @@
 //下载图片
 -(void) downloadImage:(CellAndImage*) mCellAndImage{
    // [self MyLog:[NSString stringWithFormat:@"url=%@",mCellAndImage.image_url] ];
-    [imageLoader displayImage: mCellAndImage.imageView ImageUrl:mCellAndImage.image_url];
+    [imageLoader displayImage: mCellAndImage.imageView ImageUrl:mCellAndImage.image_url TableView:mUITableView];
 }
 - (void)didReceiveMemoryWarning
 {

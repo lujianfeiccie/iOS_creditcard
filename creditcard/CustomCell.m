@@ -22,11 +22,11 @@
 }
 
 - (void)setImage:(UIImage *)t_image {
-   /* if (![t_image isEqual:image]) {
+    if (![t_image isEqual:image]) {
         image = [t_image copy];
         self.imageView.image = image;
-    }*/
-    self.imageView.image = image;
+    }
+    //self.imageView.image = image;
 }
 -(void) initStyle{
     /*self.titleLabel.numberOfLines = 1000;
@@ -35,6 +35,7 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     //无色
     self.selectionStyle = UITableViewCellSelectionStyleGray;*/
+    //NSLog(@"initStyle");
 }
 - (void)setTitle:(NSString *)t_title {
     
