@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>UILaunchImageFile</key>
+	<string>Default-568h.png</string>
+	<key>UILaunchImageFile~iphone</key>
 	<string>Default.png</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
