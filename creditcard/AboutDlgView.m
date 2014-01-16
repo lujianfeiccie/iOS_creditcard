@@ -35,10 +35,11 @@
     [ImageHelper setToolBarBtn:backButton];    //加入返回按钮
     self.navigationItem.leftBarButtonItem = backButton;
     
-    [self.img_head setImage:[UIImage imageNamed:@"me_icon.png"]];
+    [self.img_head setImage:[UIImage imageNamed:@"me.png"]];
+
+//     [[ImageHelper setToCircleWithRing:self.img_head :self.view :2];
     
-    [ImageHelper setToCircleWithRing:self.img_head :self.view :2];
-    
+      [ImageHelper setToCircle:self.img_head];
     self.view.backgroundColor = [UIColor blackColor];
     updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateLabelColor) userInfo:nil repeats:YES];
 
@@ -57,6 +58,14 @@
     [self MyLog:@"viewDidLayoutSubviews"];
     for (id obj in self.view.subviews)  {
         [ImageHelper setRect:obj];
+//        [self travelizeViews :obj];
+    }
+    
+}
+-(void) travelizeViews:(UIView*) view{
+    for (id obj in view.subviews)  {
+        [ImageHelper setRect:obj];
+       // [self travelizeViews :obj];
     }
 }
 -(void) viewDidAppear:(BOOL)animated{
